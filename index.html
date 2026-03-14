@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Jeremy Ji – Software Engineer personal website" />
+
+  <!-- Preconnect to external origins used by the page -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <!--
+    Performance improvement: load Google Fonts with display=swap so text is
+    visible immediately using a system font while the web font loads.
+  -->
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+    media="print"
+    onload="this.media='all'"
+  />
+  <noscript>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+    />
+  </noscript>
+
+  <title>Jeremy Ji</title>
+
+  <!--
+    Performance improvement: inline only the critical above-the-fold CSS so the
+    browser can render the hero without a render-blocking external stylesheet.
+    All non-critical styles live in styles.css which is loaded asynchronously.
+  -->
+  <style>
+    /* --- Critical / above-the-fold styles --- */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --color-bg: #0f172a;
+      --color-surface: #1e293b;
+      --color-accent: #38bdf8;
+      --color-text: #e2e8f0;
+      --color-muted: #94a3b8;
+      --radius: 0.75rem;
+      --transition: 200ms ease;
+    }
+
+    body {
+      font-family: Inter, system-ui, sans-serif;
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.6;
+    }
+
+    /* Skip-to-content for accessibility */
+    .skip-link {
+      position: absolute;
+      left: -9999px;
+      top: 1rem;
+      padding: 0.5rem 1rem;
+      background: var(--color-accent);
+      color: var(--color-bg);
+      border-radius: var(--radius);
+      font-weight: 600;
+      z-index: 100;
+    }
+    .skip-link:focus { left: 1rem; }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: var(--color-bg);
+      border-bottom: 1px solid var(--color-surface);
+      /* Use transform for nav visibility changes – avoids layout reflow */
+      will-change: transform;
+    }
+
+    nav {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--color-accent);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--color-muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+      /* CSS transition is GPU-accelerated; cheaper than JS-driven animations */
+      transition: color var(--transition);
+    }
+    .nav-links a:hover,
+    .nav-links a:focus-visible { color: var(--color-accent); }
+
+    /* Hero */
+    #hero {
+      min-height: 90vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 4rem 1.5rem;
+    }
+
+    .hero-content h1 {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-content h1 span { color: var(--color-accent); }
+
+    .hero-content p {
+      margin-top: 1rem;
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      color: var(--color-muted);
+      max-width: 42ch;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-cta {
+      margin-top: 2rem;
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.65rem 1.4rem;
+      border-radius: var(--radius);
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      /* opacity + transform are composited by the GPU – no layout recalc */
+      transition: opacity var(--transition), transform var(--transition);
+    }
+    .btn:hover, .btn:focus-visible { opacity: 0.85; transform: translateY(-2px); }
+
+    .btn-primary {
+      background: var(--color-accent);
+      color: var(--color-bg);
+    }
+    .btn-outline {
+      border: 2px solid var(--color-accent);
+      color: var(--color-accent);
+    }
+  </style>
+
+  <!--
+    Performance improvement: load the non-critical stylesheet asynchronously so
+    it does not block the first paint.  The onload trick converts it from a
+    render-blocking resource to a deferred one.
+  -->
+  <link
+    rel="stylesheet"
+    href="styles.css"
+    media="print"
+    onload="this.media='all'"
+  />
+  <noscript><link rel="stylesheet" href="styles.css" /></noscript>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header id="site-header">
+    <nav aria-label="Primary">
+      <a class="nav-logo" href="#hero">JJ</a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <!-- Hero ----------------------------------------------------------------->
+    <section id="hero" aria-label="Introduction">
+      <div class="hero-content">
+        <h1>Hi, I'm <span>Jeremy Ji</span></h1>
+        <p>Software engineer passionate about building fast, accessible, and beautiful web experiences.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#projects">View my work</a>
+          <a class="btn btn-outline" href="#contact">Get in touch</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- About ---------------------------------------------------------------->
+    <section id="about" class="section" aria-label="About me">
+      <div class="container">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-grid">
+          <div class="about-text">
+            <p>
+              I'm a software engineer with a focus on full-stack web development,
+              performance optimisation, and clean, maintainable code.
+            </p>
+            <p>
+              Outside of coding I enjoy hiking, photography, and exploring new
+              technologies that push the boundaries of what the web can do.
+            </p>
+          </div>
+          <div class="about-stats">
+            <div class="stat-card">
+              <span class="stat-number" data-target="3">0</span>+
+              <span class="stat-label">Years experience</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-number" data-target="20">0</span>+
+              <span class="stat-label">Projects shipped</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-number" data-target="10">0</span>+
+              <span class="stat-label">Open-source contributions</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects ------------------------------------------------------------->
+    <section id="projects" class="section" aria-label="Projects">
+      <div class="container">
+        <h2 class="section-title">Projects</h2>
+        <ul class="project-grid" role="list">
+          <li class="project-card">
+            <h3>Project Alpha</h3>
+            <p>A high-performance REST API built with Go, handling 10k req/s with sub-millisecond p99 latency.</p>
+            <div class="project-tags">
+              <span class="tag">Go</span>
+              <span class="tag">PostgreSQL</span>
+              <span class="tag">Docker</span>
+            </div>
+            <a class="project-link" href="#" aria-label="View Project Alpha on GitHub">GitHub ↗</a>
+          </li>
+          <li class="project-card">
+            <h3>Portfolio Site</h3>
+            <p>This very site – built with vanilla HTML/CSS/JS, achieving a perfect Lighthouse score through careful performance optimisation.</p>
+            <div class="project-tags">
+              <span class="tag">HTML</span>
+              <span class="tag">CSS</span>
+              <span class="tag">JavaScript</span>
+            </div>
+            <a class="project-link" href="https://github.com/Jidashuang/JeremyJi" aria-label="View Portfolio Site on GitHub">GitHub ↗</a>
+          </li>
+          <li class="project-card">
+            <h3>Data Dashboard</h3>
+            <p>Real-time analytics dashboard using React and WebSockets, with virtualised lists to render 100k rows without frame drops.</p>
+            <div class="project-tags">
+              <span class="tag">React</span>
+              <span class="tag">WebSocket</span>
+              <span class="tag">D3.js</span>
+            </div>
+            <a class="project-link" href="#" aria-label="View Data Dashboard on GitHub">GitHub ↗</a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Skills --------------------------------------------------------------->
+    <section id="skills" class="section" aria-label="Skills">
+      <div class="container">
+        <h2 class="section-title">Skills</h2>
+        <ul class="skills-list" role="list">
+          <li class="skill-item">
+            <span class="skill-name">JavaScript / TypeScript</span>
+            <div class="skill-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">
+              <div class="skill-fill" style="--pct:90%"></div>
+            </div>
+          </li>
+          <li class="skill-item">
+            <span class="skill-name">React / Next.js</span>
+            <div class="skill-bar" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
+              <div class="skill-fill" style="--pct:85%"></div>
+            </div>
+          </li>
+          <li class="skill-item">
+            <span class="skill-name">Go</span>
+            <div class="skill-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+              <div class="skill-fill" style="--pct:75%"></div>
+            </div>
+          </li>
+          <li class="skill-item">
+            <span class="skill-name">SQL / PostgreSQL</span>
+            <div class="skill-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
+              <div class="skill-fill" style="--pct:80%"></div>
+            </div>
+          </li>
+          <li class="skill-item">
+            <span class="skill-name">Docker / Kubernetes</span>
+            <div class="skill-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">
+              <div class="skill-fill" style="--pct:70%"></div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Contact -------------------------------------------------------------->
+    <section id="contact" class="section" aria-label="Contact">
+      <div class="container contact-container">
+        <h2 class="section-title">Get In Touch</h2>
+        <p class="contact-sub">Have a project in mind or just want to say hi? Drop me a message.</p>
+        <!--
+          Performance improvement: the form submission is handled client-side
+          with fetch() so the page never fully reloads.
+        -->
+        <form id="contact-form" class="contact-form" novalidate>
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" autocomplete="name" required placeholder="Your name" />
+            <span class="field-error" aria-live="polite"></span>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" autocomplete="email" required placeholder="your@email.com" />
+            <span class="field-error" aria-live="polite"></span>
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" required placeholder="Hello Jeremy…"></textarea>
+            <span class="field-error" aria-live="polite"></span>
+          </div>
+          <button class="btn btn-primary" type="submit">Send message</button>
+          <p class="form-status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; <span id="year"></span> Jeremy Ji. Built with ♥ and vanilla web technologies.</p>
+    </div>
+  </footer>
+
+  <!--
+    Performance improvement: the script is placed at the end of <body> and
+    marked defer so it never blocks HTML parsing or the first paint.
+  -->
+  <script src="main.js" defer></script>
+</body>
+</html>
