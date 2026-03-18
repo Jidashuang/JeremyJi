@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Live Agent — Jeremy Ji</title>
+  <meta name="description" content="Chat with Jeremy Ji's AI agent — trained on his thinking, work philosophy, and experience." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* ── Page layout ── */
+    .agent-page {
+      min-height: 100vh;
+      padding-top: 64px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Header ── */
+    .agent-header {
+      background: linear-gradient(135deg, var(--color-bg) 60%, var(--color-primary-light) 100%);
+      border-bottom: 1px solid var(--color-border);
+      padding: var(--space-12) 0 var(--space-10);
+    }
+
+    .agent-header-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 var(--space-8);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: var(--space-8);
+      align-items: center;
+    }
+
+    .agent-header-title {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+      margin-bottom: var(--space-3);
+    }
+
+    .agent-avatar {
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.75rem;
+      color: #fff;
+      box-shadow: 0 4px 16px rgba(217, 119, 6, 0.3);
+      flex-shrink: 0;
+    }
+
+    .agent-name {
+      font-size: var(--text-2xl);
+      font-weight: 800;
+      color: var(--color-text);
+      letter-spacing: var(--tracking-tight);
+      margin-bottom: var(--space-1);
+    }
+
+    .agent-subtitle {
+      font-size: var(--text-sm);
+      color: var(--color-text-secondary);
+    }
+
+    .agent-status {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-size: var(--text-sm);
+      color: #059669;
+      font-weight: 600;
+      padding: var(--space-2) var(--space-4);
+      background: #D1FAE5;
+      border-radius: var(--radius-full);
+    }
+
+    .agent-status::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background: #10B981;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    .agent-header-desc {
+      font-size: var(--text-base);
+      color: var(--color-text-secondary);
+      line-height: var(--leading-relaxed);
+      max-width: 500px;
+    }
+
+    /* ── Chat layout ── */
+    .chat-layout {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 0;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: var(--space-8);
+      width: 100%;
+      gap: var(--space-6);
+    }
+
+    /* ── Sidebar ── */
+    .chat-sidebar {}
+
+    .sidebar-section {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-5);
+      margin-bottom: var(--space-4);
+    }
+
+    .sidebar-title {
+      font-size: var(--text-xs);
+      font-weight: 700;
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-4);
+    }
+
+    .topic-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-2) var(--space-3);
+      background: var(--color-bg-alt);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-full);
+      font-size: var(--text-sm);
+      font-weight: 500;
+      color: var(--color-text-secondary);
+      cursor: pointer;
+      transition: all var(--transition);
+      margin: 0 var(--space-1) var(--space-2) 0;
+      white-space: nowrap;
+    }
+
+    .topic-chip:hover {
+      background: var(--color-primary-light);
+      color: var(--color-primary);
+      border-color: var(--color-primary);
+    }
+
+    .capability-item {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-3);
+      padding: var(--space-3) 0;
+      border-bottom: 1px solid var(--color-border-light);
+    }
+
+    .capability-item:last-child { border-bottom: none; }
+
+    .cap-icon {
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--color-primary-light);
+      border-radius: var(--radius-sm);
+      font-size: 0.875rem;
+      flex-shrink: 0;
+    }
+
+    .cap-text {
+      font-size: var(--text-sm);
+      color: var(--color-text-secondary);
+      line-height: var(--leading-relaxed);
+    }
+
+    .cap-text strong {
+      display: block;
+      color: var(--color-text);
+      font-size: var(--text-sm);
+      margin-bottom: 2px;
+    }
+
+    /* ── Chat window ── */
+    .chat-window {
+      display: flex;
+      flex-direction: column;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      min-height: 600px;
+    }
+
+    .chat-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--space-4) var(--space-6);
+      border-bottom: 1px solid var(--color-border);
+      background: var(--color-surface);
+    }
+
+    .chat-header-info {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+
+    .chat-header-avatar {
+      width: 36px;
+      height: 36px;
+      background: var(--color-primary-light);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+    }
+
+    .chat-header-name {
+      font-size: var(--text-sm);
+      font-weight: 700;
+      color: var(--color-text);
+    }
+
+    .chat-header-status {
+      font-size: var(--text-xs);
+      color: #10B981;
+    }
+
+    .chat-actions {
+      display: flex;
+      gap: var(--space-2);
+    }
+
+    .chat-action-btn {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius-sm);
+      color: var(--color-text-muted);
+      font-size: 0.9rem;
+      transition: all var(--transition);
+    }
+
+    .chat-action-btn:hover {
+      background: var(--color-bg-alt);
+      color: var(--color-text);
+    }
+
+    /* ── Messages ── */
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: var(--space-6);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-5);
+      background: var(--color-bg);
+    }
+
+    .message {
+      display: flex;
+      gap: var(--space-3);
+      animation: fadeInUp 0.3s ease both;
+    }
+
+    .message-agent {
+      align-items: flex-start;
+    }
+
+    .message-user {
+      flex-direction: row-reverse;
+      align-items: flex-start;
+    }
+
+    .message-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+
+    .message-agent .message-avatar {
+      background: linear-gradient(135deg, var(--color-primary) 0%, #B45309 100%);
+      color: #fff;
+    }
+
+    .message-user .message-avatar {
+      background: var(--color-accent);
+      color: #fff;
+    }
+
+    .message-content {
+      max-width: 72%;
+    }
+
+    .message-bubble {
+      padding: var(--space-4) var(--space-5);
+      border-radius: var(--radius-md);
+      font-size: var(--text-sm);
+      line-height: var(--leading-relaxed);
+    }
+
+    .message-agent .message-bubble {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      color: var(--color-text);
+      border-top-left-radius: var(--radius-sm);
+    }
+
+    .message-user .message-bubble {
+      background: var(--color-primary);
+      color: #fff;
+      border-top-right-radius: var(--radius-sm);
+    }
+
+    .message-meta {
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+      margin-top: var(--space-1);
+      padding: 0 var(--space-1);
+    }
+
+    .message-user .message-meta { text-align: right; }
+
+    .message-agent .message-bubble p {
+      color: var(--color-text);
+      margin: 0;
+      line-height: var(--leading-relaxed);
+    }
+
+    .message-agent .message-bubble p + p {
+      margin-top: var(--space-3);
+    }
+
+    .message-agent .message-bubble .highlight-list {
+      margin-top: var(--space-3);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+
+    .message-agent .message-bubble .highlight-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-2);
+      color: var(--color-text);
+    }
+
+    .message-agent .message-bubble .highlight-list li::before {
+      content: '→';
+      color: var(--color-primary);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .typing-indicator {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+      padding: var(--space-4) var(--space-5);
+    }
+
+    .typing-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--color-text-muted);
+      border-radius: 50%;
+      animation: typingBounce 1.2s infinite;
+    }
+
+    .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes typingBounce {
+      0%, 60%, 100% { transform: translateY(0); }
+      30% { transform: translateY(-6px); }
+    }
+
+    /* ── Chat input ── */
+    .chat-input-area {
+      padding: var(--space-4) var(--space-6);
+      border-top: 1px solid var(--color-border);
+      background: var(--color-surface);
+    }
+
+    .quick-replies {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+      margin-bottom: var(--space-3);
+    }
+
+    .quick-reply {
+      padding: var(--space-1) var(--space-3);
+      background: var(--color-bg-alt);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-full);
+      font-size: var(--text-xs);
+      font-weight: 500;
+      color: var(--color-text-secondary);
+      cursor: pointer;
+      transition: all var(--transition);
+      white-space: nowrap;
+    }
+
+    .quick-reply:hover {
+      background: var(--color-primary-light);
+      color: var(--color-primary);
+      border-color: var(--color-primary);
+    }
+
+    .input-row {
+      display: flex;
+      gap: var(--space-3);
+      align-items: flex-end;
+    }
+
+    .chat-input {
+      flex: 1;
+      min-height: 44px;
+      max-height: 140px;
+      padding: var(--space-3) var(--space-4);
+      background: var(--color-bg-alt);
+      border: 1.5px solid var(--color-border);
+      border-radius: var(--radius-md);
+      font-family: var(--font-sans);
+      font-size: var(--text-sm);
+      color: var(--color-text);
+      resize: none;
+      outline: none;
+      transition: border-color var(--transition);
+      line-height: var(--leading-relaxed);
+    }
+
+    .chat-input::placeholder { color: var(--color-text-muted); }
+
+    .chat-input:focus {
+      border-color: var(--color-primary);
+      background: var(--color-surface);
+    }
+
+    .send-btn {
+      width: 44px;
+      height: 44px;
+      background: var(--color-primary);
+      color: #fff;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      transition: all var(--transition);
+      box-shadow: 0 2px 8px rgba(217,119,6,0.3);
+    }
+
+    .send-btn:hover {
+      background: var(--color-primary-dark);
+      transform: scale(1.05);
+    }
+
+    .send-btn:active { transform: scale(0.95); }
+
+    .input-hint {
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+      margin-top: var(--space-2);
+      text-align: right;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .chat-layout {
+        grid-template-columns: 1fr;
+        padding: var(--space-5);
+      }
+      .chat-sidebar {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-4);
+      }
+      .sidebar-section { margin-bottom: 0; }
+    }
+
+    @media (max-width: 640px) {
+      .agent-header-inner { grid-template-columns: 1fr; }
+      .chat-layout { padding: var(--space-4); }
+      .chat-sidebar { grid-template-columns: 1fr; }
+      .message-content { max-width: 85%; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav" role="navigation">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">Jeremy <span>Ji</span></a>
+    <div class="nav-links" id="nav-links">
+      <a href="index.html" class="nav-link">🏠 Home</a>
+      <a href="live-agent.html" class="nav-link active">🤖 Live Agent</a>
+      <a href="proof-of-work.html" class="nav-link">📊 Proof of Work</a>
+      <a href="playground.html" class="nav-link">🧪 Playground</a>
+      <a href="gallery.html" class="nav-link">🖼 Gallery</a>
+      <a href="interface.html" class="nav-link">✉️ Interface</a>
+    </div>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="agent-page">
+  <!-- Agent Header -->
+  <div class="agent-header">
+    <div class="agent-header-inner">
+      <div>
+        <div class="agent-header-title">
+          <div class="agent-avatar">🤖</div>
+          <div>
+            <div class="agent-name">Jeremy's AI Agent</div>
+            <div class="agent-subtitle">Trained on Jeremy's thinking · Updated regularly</div>
+          </div>
+        </div>
+        <p class="agent-header-desc">
+          This agent knows Jeremy's work history, thinking frameworks, and collaboration style.
+          Ask it anything you'd ask Jeremy — it'll give you a considered response based on his actual perspective.
+        </p>
+      </div>
+      <div>
+        <div class="agent-status">Online · Ready</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chat Layout -->
+  <div class="chat-layout">
+    <!-- Sidebar -->
+    <aside class="chat-sidebar">
+      <div class="sidebar-section">
+        <div class="sidebar-title">Suggested Topics</div>
+        <div>
+          <button class="topic-chip" onclick="sendQuickMessage(this)">🎯 Work history</button>
+          <button class="topic-chip" onclick="sendQuickMessage(this)">🤖 AI in marketing</button>
+          <button class="topic-chip" onclick="sendQuickMessage(this)">📊 Campaign results</button>
+          <button class="topic-chip" onclick="sendQuickMessage(this)">🤝 Collaboration style</button>
+          <button class="topic-chip" onclick="sendQuickMessage(this)">💡 Philosophy</button>
+          <button class="topic-chip" onclick="sendQuickMessage(this)">📍 Location & availability</button>
+          <button class="topic-chip" onclick="sendQuickMessage(this)">🎓 Background</button>
+          <button class="topic-chip" onclick="sendQuickMessage(this)">🛠 Current projects</button>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-title">What I Can Tell You</div>
+        <div class="capability-item">
+          <div class="cap-icon">📖</div>
+          <div class="cap-text">
+            <strong>Jeremy's background</strong>
+            7 years, multiple industries, key milestones
+          </div>
+        </div>
+        <div class="capability-item">
+          <div class="cap-icon">🧪</div>
+          <div class="cap-text">
+            <strong>How he thinks</strong>
+            Decision frameworks, working principles, taste
+          </div>
+        </div>
+        <div class="capability-item">
+          <div class="cap-icon">💼</div>
+          <div class="cap-text">
+            <strong>Collaboration terms</strong>
+            What he takes on, what he doesn't, how to work together
+          </div>
+        </div>
+        <div class="capability-item">
+          <div class="cap-icon">📈</div>
+          <div class="cap-text">
+            <strong>Real results</strong>
+            Actual numbers, cases, and impact behind the work
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-title">Disclaimer</div>
+        <p style="font-size: var(--text-xs); color: var(--color-text-muted); line-height: var(--leading-relaxed);">
+          This is a static demo agent. In the full version, responses are powered by an LLM fine-tuned on Jeremy's
+          actual writing and documented frameworks. For now, selected example conversations are shown.
+        </p>
+      </div>
+    </aside>
+
+    <!-- Chat Window -->
+    <div class="chat-window">
+      <div class="chat-header">
+        <div class="chat-header-info">
+          <div class="chat-header-avatar">🤖</div>
+          <div>
+            <div class="chat-header-name">Jeremy's Agent</div>
+            <div class="chat-header-status">● Online</div>
+          </div>
+        </div>
+        <div class="chat-actions">
+          <button class="chat-action-btn" title="Clear conversation" onclick="clearChat()">🗑</button>
+          <button class="chat-action-btn" title="Export conversation">⬇</button>
+        </div>
+      </div>
+
+      <div class="chat-messages" id="chat-messages">
+        <!-- Initial welcome message -->
+        <div class="message message-agent" style="animation-delay: 0.1s;">
+          <div class="message-avatar">🤖</div>
+          <div class="message-content">
+            <div class="message-bubble">
+              <p>Hi! I'm Jeremy's AI agent. I'm trained on his work history, thinking style, and how he collaborates.</p>
+              <p>You can ask me about his background, past campaigns, how he approaches strategy, what kinds of projects he takes on, or how to work with him.</p>
+              <ul class="highlight-list">
+                <li>7 years in marketing across B2B/B2C</li>
+                <li>Managed campaigns totalling RMB 150M+</li>
+                <li>Now building at the AI × marketing intersection</li>
+              </ul>
+              <p style="margin-top: var(--space-3);">What would you like to know?</p>
+            </div>
+            <div class="message-meta">Jeremy's Agent · just now</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="chat-input-area">
+        <div class="quick-replies" id="quick-replies">
+          <button class="quick-reply" onclick="handleQuickReply(this)">What's your background?</button>
+          <button class="quick-reply" onclick="handleQuickReply(this)">How do you use AI in your work?</button>
+          <button class="quick-reply" onclick="handleQuickReply(this)">What kind of projects do you take on?</button>
+          <button class="quick-reply" onclick="handleQuickReply(this)">Can we collaborate?</button>
+        </div>
+        <div class="input-row">
+          <textarea
+            class="chat-input"
+            id="chat-input"
+            placeholder="Ask Jeremy's agent anything..."
+            rows="1"
+            aria-label="Chat message"
+          ></textarea>
+          <button class="send-btn" onclick="sendMessage()" aria-label="Send message">➤</button>
+        </div>
+        <div class="input-hint">Press Enter to send · Shift+Enter for new line</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-logo">Jeremy <span>Ji</span></div>
+    <nav class="footer-links">
+      <a href="live-agent.html" class="footer-link">Live Agent</a>
+      <a href="proof-of-work.html" class="footer-link">Proof of Work</a>
+      <a href="playground.html" class="footer-link">Playground</a>
+      <a href="gallery.html" class="footer-link">Gallery</a>
+      <a href="interface.html" class="footer-link">Interface</a>
+    </nav>
+    <div class="footer-copy">© 2024 Jeremy Ji</div>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+<script>
+  // ── Preloaded agent responses ──
+  const responses = {
+    "What's your background?": `<p>I've spent 7 years across brand marketing, performance campaigns, and content strategy — mainly in tech and consumer brands in China.</p>
+<p>Key highlights:</p>
+<ul class="highlight-list">
+  <li>Led brand campaigns managing budgets totalling RMB 150M+</li>
+  <li>Built content engines that scaled to millions of monthly impressions</li>
+  <li>Worked across Douyin, WeChat, Xiaohongshu, and B2B digital channels</li>
+  <li>Transitioned from pure marketing to AI × marketing tooling over the last 2 years</li>
+</ul>
+<p>The thread throughout: I care more about clear thinking and measurable outcomes than titles or platforms.</p>`,
+
+    "How do you use AI in your work?": `<p>AI is now embedded in almost every step of my workflow — not as a gimmick, but as genuine leverage.</p>
+<ul class="highlight-list">
+  <li><strong>Strategy drafts</strong> — I use Claude/ChatGPT to stress-test briefs before I finalize them</li>
+  <li><strong>Content variation</strong> — generate 10 hooks, pick the best 2, refine from there</li>
+  <li><strong>Research synthesis</strong> — Perplexity + NotebookLM to process competitive intel fast</li>
+  <li><strong>Automation</strong> — n8n workflows that reduce manual reporting time by ~60%</li>
+</ul>
+<p>The key thing I've learned: AI raises the floor, but your taste and judgment set the ceiling. You still need to know what "good" looks like.</p>`,
+
+    "What kind of projects do you take on?": `<p>I'm selective. The projects I do best are at the intersection of brand thinking and measurable growth — not one or the other.</p>
+<ul class="highlight-list">
+  <li>Campaign strategy with real budget accountability</li>
+  <li>Content systems and editorial frameworks</li>
+  <li>AI marketing workflow design and implementation</li>
+  <li>Brand narrative for tech/AI-native companies</li>
+</ul>
+<p>I don't take on projects that are purely executional with no strategic input, or ones where the brief is "go viral" with no defined audience or goal.</p>`,
+
+    "Can we collaborate?": `<p>Probably yes — Jeremy is open to the right collaborations. The best fit tends to be:</p>
+<ul class="highlight-list">
+  <li>A defined scope with clear success metrics</li>
+  <li>A counterpart who's already thought through the problem</li>
+  <li>A timeline of at least 4 weeks for any serious strategy work</li>
+</ul>
+<p>Best way to start: send him a message through the Interface page with context on what you're working on and what kind of help you need. He reads everything.</p>`,
+
+    "default": `<p>That's a great question. Based on Jeremy's documented thinking and experience, here's how he'd likely approach that:</p>
+<p>Jeremy tends to start with first principles — what's the actual goal, who's the audience, and what does success look like in concrete terms. He's skeptical of solutions in search of problems.</p>
+<p>For a more specific answer, try one of the suggested topics or reach out directly via the <a href="interface.html" style="color: var(--color-primary);">Interface page</a>.</p>`
+  };
+
+  // ── Chat UI functions ──
+  function getTimestamp() {
+    return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  }
+
+  function appendMessage(role, content, animate = true) {
+    const messagesEl = document.getElementById('chat-messages');
+    const msgEl = document.createElement('div');
+    msgEl.className = `message message-${role}`;
+    if (animate) msgEl.style.animationDelay = '0s';
+
+    const avatarEl = document.createElement('div');
+    avatarEl.className = 'message-avatar';
+    avatarEl.textContent = role === 'agent' ? '🤖' : '👤';
+
+    const contentEl = document.createElement('div');
+    contentEl.className = 'message-content';
+
+    const bubbleEl = document.createElement('div');
+    bubbleEl.className = 'message-bubble';
+    if (role === 'user') {
+      bubbleEl.textContent = content;
+    } else {
+      bubbleEl.innerHTML = content;
+    }
+
+    const metaEl = document.createElement('div');
+    metaEl.className = 'message-meta';
+    metaEl.textContent = `${role === 'agent' ? "Jeremy's Agent" : "You"} · ${getTimestamp()}`;
+
+    contentEl.appendChild(bubbleEl);
+    contentEl.appendChild(metaEl);
+    msgEl.appendChild(avatarEl);
+    msgEl.appendChild(contentEl);
+    messagesEl.appendChild(msgEl);
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+    return msgEl;
+  }
+
+  function showTyping() {
+    const messagesEl = document.getElementById('chat-messages');
+    const typingEl = document.createElement('div');
+    typingEl.className = 'message message-agent';
+    typingEl.id = 'typing-indicator';
+    typingEl.innerHTML = `
+      <div class="message-avatar">🤖</div>
+      <div class="message-content">
+        <div class="message-bubble">
+          <div class="typing-indicator">
+            <div class="typing-dot"></div>
+            <div class="typing-dot"></div>
+            <div class="typing-dot"></div>
+          </div>
+        </div>
+      </div>`;
+    messagesEl.appendChild(typingEl);
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+  }
+
+  function removeTyping() {
+    const el = document.getElementById('typing-indicator');
+    if (el) el.remove();
+  }
+
+  function sendMessage() {
+    const input = document.getElementById('chat-input');
+    const text = input.value.trim();
+    if (!text) return;
+
+    // Hide quick replies after first interaction
+    document.getElementById('quick-replies').style.display = 'none';
+
+    appendMessage('user', text);
+    input.value = '';
+    input.style.height = 'auto';
+
+    showTyping();
+    const delay = 800 + Math.random() * 600;
+    setTimeout(() => {
+      removeTyping();
+      const response = responses[text] || responses['default'];
+      appendMessage('agent', response);
+    }, delay);
+  }
+
+  function handleQuickReply(btn) {
+    const text = btn.textContent;
+    document.getElementById('quick-replies').style.display = 'none';
+    appendMessage('user', text);
+    showTyping();
+    setTimeout(() => {
+      removeTyping();
+      const response = responses[text] || responses['default'];
+      appendMessage('agent', response);
+    }, 900 + Math.random() * 400);
+  }
+
+  function sendQuickMessage(chip) {
+    const topicMap = {
+      '🎯 Work history': "What's your background?",
+      '🤖 AI in marketing': "How do you use AI in your work?",
+      '📊 Campaign results': "What's your background?",
+      '🤝 Collaboration style': "Can we collaborate?",
+      '💡 Philosophy': "How do you use AI in your work?",
+      '📍 Location & availability': "Can we collaborate?",
+      '🎓 Background': "What's your background?",
+      '🛠 Current projects': "What kind of projects do you take on?"
+    };
+    const text = topicMap[chip.textContent] || chip.textContent;
+    document.getElementById('chat-input').value = text;
+    document.getElementById('chat-input').focus();
+  }
+
+  function clearChat() {
+    const messagesEl = document.getElementById('chat-messages');
+    messagesEl.innerHTML = '';
+    document.getElementById('quick-replies').style.display = 'flex';
+    appendMessage('agent', `<p>Chat cleared. I'm ready for new questions!</p>`, false);
+  }
+
+  // ── Auto-resize textarea ──
+  const chatInput = document.getElementById('chat-input');
+  chatInput.addEventListener('input', function () {
+    this.style.height = 'auto';
+    this.style.height = Math.min(this.scrollHeight, 140) + 'px';
+  });
+  chatInput.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      sendMessage();
+    }
+  });
+</script>
+</body>
+</html>

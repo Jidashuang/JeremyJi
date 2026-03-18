@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gallery — Jeremy Ji</title>
+  <meta name="description" content="Jeremy Ji's visual diary — photography, digital illustrations, and moments from the road." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* ── Gallery Header ── */
+    .gallery-tabs {
+      display: flex;
+      gap: var(--space-2);
+      margin-top: var(--space-8);
+      flex-wrap: wrap;
+    }
+
+    .gallery-tab {
+      padding: var(--space-2) var(--space-5);
+      background: var(--color-surface);
+      border: 1.5px solid var(--color-border);
+      border-radius: var(--radius-full);
+      font-size: var(--text-sm);
+      font-weight: 600;
+      color: var(--color-text-secondary);
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+
+    .gallery-tab:hover {
+      border-color: var(--color-primary);
+      color: var(--color-primary);
+    }
+
+    .gallery-tab.active {
+      background: var(--color-primary);
+      border-color: var(--color-primary);
+      color: #fff;
+    }
+
+    /* ── Gallery Grid ── */
+    .gallery-section {
+      padding: var(--space-16) 0 var(--space-24);
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-auto-rows: 200px;
+      gap: var(--space-4);
+    }
+
+    .gallery-item {
+      position: relative;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      cursor: pointer;
+      background: var(--color-bg-alt);
+      border: 1px solid var(--color-border);
+      transition: all var(--transition);
+    }
+
+    .gallery-item:hover {
+      box-shadow: var(--shadow-lg);
+      transform: scale(1.01);
+      z-index: 2;
+    }
+
+    /* Size variants */
+    .gallery-item.wide { grid-column: span 2; }
+    .gallery-item.tall { grid-row: span 2; }
+    .gallery-item.large { grid-column: span 2; grid-row: span 2; }
+
+    /* Colored placeholder backgrounds */
+    .gallery-item.c1 { background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%); }
+    .gallery-item.c2 { background: linear-gradient(135deg, #EEF2F9 0%, #C7D4EF 100%); }
+    .gallery-item.c3 { background: linear-gradient(135deg, #ECFDF5 0%, #A7F3D0 100%); }
+    .gallery-item.c4 { background: linear-gradient(135deg, #F5F3FF 0%, #DDD6FE 100%); }
+    .gallery-item.c5 { background: linear-gradient(135deg, #FFF1F2 0%, #FECDD3 100%); }
+    .gallery-item.c6 { background: linear-gradient(135deg, #E0F2FE 0%, #BAE6FD 100%); }
+    .gallery-item.c7 { background: linear-gradient(135deg, #FDF4FF 0%, #F0ABFC 100%); }
+    .gallery-item.c8 { background: linear-gradient(135deg, #FFF7ED 0%, #FED7AA 100%); }
+    .gallery-item.c9 { background: linear-gradient(135deg, #F0FDF4 0%, #BBF7D0 100%); }
+    .gallery-item.c10 { background: linear-gradient(135deg, #FAFAF8 0%, #E5E7EB 100%); }
+
+    .gallery-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-2);
+    }
+
+    .gallery-placeholder-icon {
+      font-size: 2.5rem;
+      opacity: 0.4;
+    }
+
+    .gallery-placeholder-label {
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+      font-weight: 600;
+      letter-spacing: var(--tracking-wider);
+      text-transform: uppercase;
+    }
+
+    /* Caption overlay */
+    .gallery-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: var(--space-4) var(--space-4) var(--space-3);
+      background: linear-gradient(0deg, rgba(0,0,0,0.65) 0%, transparent 100%);
+      transform: translateY(100%);
+      transition: transform var(--transition);
+    }
+
+    .gallery-item:hover .gallery-caption {
+      transform: translateY(0);
+    }
+
+    .gallery-caption-title {
+      font-size: var(--text-sm);
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 2px;
+    }
+
+    .gallery-caption-sub {
+      font-size: var(--text-xs);
+      color: rgba(255,255,255,0.75);
+    }
+
+    .gallery-caption-tag {
+      display: inline-block;
+      padding: 1px 8px;
+      background: rgba(255,255,255,0.2);
+      border-radius: var(--radius-full);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: var(--tracking-wider);
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.9);
+      margin-top: var(--space-1);
+    }
+
+    /* ── Instagram sticky ── */
+    .instagram-sticky {
+      position: fixed;
+      bottom: var(--space-8);
+      right: var(--space-8);
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-3) var(--space-5);
+      background: linear-gradient(135deg, #F9CE34 0%, #EE2A7B 50%, #6228D7 100%);
+      color: #fff;
+      border-radius: var(--radius-full);
+      font-size: var(--text-sm);
+      font-weight: 700;
+      box-shadow: 0 4px 20px rgba(238, 42, 123, 0.4);
+      text-decoration: none;
+      transition: all var(--transition);
+    }
+
+    .instagram-sticky:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 28px rgba(238, 42, 123, 0.5);
+    }
+
+    /* ── Illustrations section ── */
+    .illustration-section {
+      padding: var(--space-16) 0;
+      background: var(--color-bg-alt);
+    }
+
+    .illustration-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-6);
+      margin-top: var(--space-10);
+    }
+
+    .illustration-item {
+      position: relative;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      aspect-ratio: 4/3;
+      border: 1px solid var(--color-border);
+      background: var(--item-bg, var(--color-surface));
+      transition: all var(--transition);
+    }
+
+    .illustration-item:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+
+    .illustration-content {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-3);
+      padding: var(--space-6);
+    }
+
+    .illustration-emoji {
+      font-size: 4rem;
+    }
+
+    .illustration-title {
+      font-size: var(--text-base);
+      font-weight: 700;
+      color: var(--color-text);
+      text-align: center;
+    }
+
+    .illustration-desc {
+      font-size: var(--text-sm);
+      color: var(--color-text-secondary);
+      text-align: center;
+      line-height: var(--leading-relaxed);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 1024px) {
+      .gallery-grid { grid-template-columns: repeat(3, 1fr); }
+      .illustration-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 768px) {
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .gallery-item.large { grid-column: span 2; grid-row: span 1; }
+      .gallery-item.tall { grid-row: span 1; }
+    }
+
+    @media (max-width: 480px) {
+      .gallery-grid { grid-template-columns: 1fr; }
+      .gallery-item.wide, .gallery-item.large { grid-column: span 1; }
+      .illustration-grid { grid-template-columns: 1fr; }
+      .instagram-sticky { bottom: var(--space-4); right: var(--space-4); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav" role="navigation">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">Jeremy <span>Ji</span></a>
+    <div class="nav-links" id="nav-links">
+      <a href="index.html" class="nav-link">🏠 Home</a>
+      <a href="live-agent.html" class="nav-link">🤖 Live Agent</a>
+      <a href="proof-of-work.html" class="nav-link">📊 Proof of Work</a>
+      <a href="playground.html" class="nav-link">🧪 Playground</a>
+      <a href="gallery.html" class="nav-link active">🖼 Gallery</a>
+      <a href="interface.html" class="nav-link">✉️ Interface</a>
+    </div>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Page Header -->
+<div class="page-header">
+  <div class="page-header-inner">
+    <div class="section-label animate-fade-up">GALLERY</div>
+    <h1 class="animate-fade-up stagger-1">Photos, sketches,<br />and <span style="color:var(--color-primary)">fragments</span></h1>
+    <p class="section-subtitle animate-fade-up stagger-2" style="margin-top: var(--space-4);">
+      A visual diary. Cities I've walked through, things I've noticed, and digital sketches
+      that didn't fit anywhere else.
+    </p>
+
+    <div class="gallery-tabs animate-fade-up stagger-3">
+      <button class="gallery-tab active" data-tab="all">All</button>
+      <button class="gallery-tab" data-tab="photo">Photography</button>
+      <button class="gallery-tab" data-tab="illustration">Illustration</button>
+      <button class="gallery-tab" data-tab="travel">Travel</button>
+    </div>
+  </div>
+</div>
+
+<!-- Gallery Grid -->
+<section class="gallery-section">
+  <div class="container">
+    <div class="gallery-grid">
+
+      <!-- Large feature item -->
+      <div class="gallery-item large c1 reveal" data-type="photo travel">
+        <div class="gallery-placeholder">
+          <div class="gallery-placeholder-icon">🌆</div>
+          <div class="gallery-placeholder-label">City dawn</div>
+        </div>
+        <div class="gallery-caption">
+          <div class="gallery-caption-title">Shanghai at 6am</div>
+          <div class="gallery-caption-sub">Pudong waterfront, before the city wakes</div>
+          <span class="gallery-caption-tag">Travel</span>
+        </div>
+      </div>
+
+      <!-- Regular items -->
+      <div class="gallery-item c2 reveal reveal-delay-1" data-type="illustration">
+        <div class="gallery-placeholder">
+          <div class="gallery-placeholder-icon">🎨</div>
+          <div class="gallery-placeholder-label">Digital art</div>
+        </div>
+        <div class="gallery-caption">
+          <div class="gallery-caption-title">Network Sketch #1</div>
+          <div class="gallery-caption-sub">Exploring AI node diagrams</div>
+          <span class="gallery-caption-tag">Illustration</span>
+        </div>
+      </div>
+
+      <div class="gallery-item c3 reveal reveal-delay-2" data-type="photo">
+        <div class="gallery-placeholder">
+          <div class="gallery-placeholder-icon">🌿</div>
+          <div class="gallery-placeholder-label">Nature</div>
+        </div>
+        <div class="gallery-caption">
+          <div class="gallery-caption-title">Quiet afternoon</div>
+          <div class="gallery-caption-sub">Jing'an Temple garden</div>
+          <span class="gallery-caption-tag">Photo</span>
+        </div>
+      </div>
+
+      <div class="gallery-item wide c4 reveal" data-type="travel">
+        <div class="gallery-placeholder">
+          <div class="gallery-placeholder-icon">🗻</div>
+          <div class="gallery-placeholder-label">Landscape</div>
+        </div>
+        <div class="gallery-caption">
+          <div class="gallery-caption-title">Yunnan highway</div>
+          <div class="gallery-caption-sub">Road trip through the mountains, 2023</div>
+          <span class="gallery-caption-tag">Travel</span>
+        </div>
+      </div>
+
+      <div class="gallery-item tall c5 reveal reveal-delay-1" data-type="illustration">
+        <div class="gallery-placeholder">
+          <div class="gallery-placeholder-icon">✏️</div>
+          <div class="gallery-placeholder-label">Sketch</div>
+        </div>
+        <div class="gallery-caption">
+          <div class="gallery-caption-title">Brand Character Study</div>
+          <div class="gallery-caption-sub">Character concept for a client brief</div>
+          <span class="gallery-caption-tag">Illustration</span>
+        </div>
+      </div>
+
+      <div class="gallery-item c6 reveal reveal-delay-2" data-type="photo">
+        <div class="gallery-placeholder">
+          <div class="gallery-placeholder-icon">☁️</div>
+          <div class="gallery-placeholder-label">Sky</div>
+        </div>
+        <div class="gallery-caption">
+          <div class="gallery-caption-title">Perfect light</div>
+          <div class="gallery-caption-sub">Golden hour, West Lake</div>
+          <span class="gallery-caption-tag">Photo</span>
+        </div>
+      </div>
+
+      <div class="gallery-item c7 reveal reveal-delay-3" data-type="photo">
+        <div class="gallery-placeholder">
+          <div class="gallery-placeholder-icon">🏙</div>
+          <div class="gallery-placeholder-label">Urban</div>
+        </div>
+        <div class="gallery-caption">
+          <div class="gallery-caption-title">Neon geometry</div>
+          <div class="gallery-caption-sub">Chongqing night market</div>
+          <span class="gallery-caption-tag">Travel</span>
+        </div>
+      </div>
+
+      <div class="gallery-item c8 reveal" data-type="illustration">
+        <div class="gallery-placeholder">
+          <div class="gallery-placeholder-icon">🤖</div>
+          <div class="gallery-placeholder-label">AI art</div>
+        </div>
+        <div class="gallery-caption">
+          <div class="gallery-caption-title">AI × Human</div>
+          <div class="gallery-caption-sub">Midjourney exploration series</div>
+          <span class="gallery-caption-tag">Illustration</span>
+        </div>
+      </div>
+
+      <div class="gallery-item wide c9 reveal reveal-delay-1" data-type="travel">
+        <div class="gallery-placeholder">
+          <div class="gallery-placeholder-icon">🌊</div>
+          <div class="gallery-placeholder-label">Coast</div>
+        </div>
+        <div class="gallery-caption">
+          <div class="gallery-caption-title">Fujian coastline</div>
+          <div class="gallery-caption-sub">Somewhere between Xiamen and Quanzhou</div>
+          <span class="gallery-caption-tag">Travel</span>
+        </div>
+      </div>
+
+      <div class="gallery-item c10 reveal reveal-delay-2" data-type="photo">
+        <div class="gallery-placeholder">
+          <div class="gallery-placeholder-icon">🪴</div>
+          <div class="gallery-placeholder-label">Still life</div>
+        </div>
+        <div class="gallery-caption">
+          <div class="gallery-caption-title">Desk study</div>
+          <div class="gallery-caption-sub">Home office, afternoon light</div>
+          <span class="gallery-caption-tag">Photo</span>
+        </div>
+      </div>
+
+      <div class="gallery-item c1 reveal reveal-delay-3" data-type="illustration">
+        <div class="gallery-placeholder">
+          <div class="gallery-placeholder-icon">📊</div>
+          <div class="gallery-placeholder-label">Data viz</div>
+        </div>
+        <div class="gallery-caption">
+          <div class="gallery-caption-title">Marketing Flow</div>
+          <div class="gallery-caption-sub">Visualizing campaign architecture</div>
+          <span class="gallery-caption-tag">Illustration</span>
+        </div>
+      </div>
+
+      <div class="gallery-item c2 reveal reveal-delay-4" data-type="photo">
+        <div class="gallery-placeholder">
+          <div class="gallery-placeholder-icon">🌙</div>
+          <div class="gallery-placeholder-label">Night</div>
+        </div>
+        <div class="gallery-caption">
+          <div class="gallery-caption-title">Night walk</div>
+          <div class="gallery-caption-sub">Old town, 11pm</div>
+          <span class="gallery-caption-tag">Photo</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Illustrations section -->
+<section class="illustration-section">
+  <div class="container">
+    <div class="section-label reveal">DIGITAL WORK</div>
+    <h2 class="section-title reveal reveal-delay-1">Sketches and experiments</h2>
+    <p class="section-subtitle reveal reveal-delay-2">Digital art, concept sketches, and AI-assisted visual exploration.</p>
+
+    <div class="illustration-grid">
+      <div class="illustration-item reveal" style="--item-bg: #FEF3C7;">
+        <div class="illustration-content">
+          <div class="illustration-emoji">🧭</div>
+          <div class="illustration-title">Brand Compass System</div>
+          <div class="illustration-desc">A visual framework for defining brand north star and positioning axes</div>
+        </div>
+      </div>
+
+      <div class="illustration-item reveal reveal-delay-1" style="--item-bg: #EEF2F9;">
+        <div class="illustration-content">
+          <div class="illustration-emoji">🕸</div>
+          <div class="illustration-title">AI Workflow Diagram</div>
+          <div class="illustration-desc">Mapping how AI tools connect in a modern marketing stack</div>
+        </div>
+      </div>
+
+      <div class="illustration-item reveal reveal-delay-2" style="--item-bg: #ECFDF5;">
+        <div class="illustration-content">
+          <div class="illustration-emoji">🌱</div>
+          <div class="illustration-title">Content Growth Model</div>
+          <div class="illustration-desc">Visualizing compounding content returns over 18 months</div>
+        </div>
+      </div>
+
+      <div class="illustration-item reveal reveal-delay-3" style="--item-bg: #F5F3FF;">
+        <div class="illustration-content">
+          <div class="illustration-emoji">🎭</div>
+          <div class="illustration-title">Persona Mapping</div>
+          <div class="illustration-desc">Illustrating 4 audience archetypes for a B2C client brief</div>
+        </div>
+      </div>
+
+      <div class="illustration-item reveal reveal-delay-4" style="--item-bg: #FFF1F2;">
+        <div class="illustration-content">
+          <div class="illustration-emoji">⚡</div>
+          <div class="illustration-title">Campaign Burst Pattern</div>
+          <div class="illustration-desc">Visualizing 6-week campaign heat map and channel timing</div>
+        </div>
+      </div>
+
+      <div class="illustration-item reveal reveal-delay-5" style="--item-bg: #FFF7ED;">
+        <div class="illustration-content">
+          <div class="illustration-emoji">🔮</div>
+          <div class="illustration-title">Future of Marketing</div>
+          <div class="illustration-desc">A personal essay turned visual — the AI-human creative split</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Instagram sticky button -->
+<a href="https://instagram.com/jeremyji" target="_blank" rel="noopener" class="instagram-sticky" aria-label="Follow on Instagram">
+  📸 Follow on Instagram
+</a>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-logo">Jeremy <span>Ji</span></div>
+    <nav class="footer-links">
+      <a href="live-agent.html" class="footer-link">Live Agent</a>
+      <a href="proof-of-work.html" class="footer-link">Proof of Work</a>
+      <a href="playground.html" class="footer-link">Playground</a>
+      <a href="gallery.html" class="footer-link">Gallery</a>
+      <a href="interface.html" class="footer-link">Interface</a>
+    </nav>
+    <div class="footer-copy">© 2024 Jeremy Ji</div>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+<script>
+  // Gallery tab filter
+  const tabs = document.querySelectorAll('.gallery-tab');
+  const galleryItems = document.querySelectorAll('.gallery-item[data-type]');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      const filter = tab.dataset.tab;
+
+      galleryItems.forEach(item => {
+        const types = item.dataset.type || '';
+        if (filter === 'all' || types.includes(filter)) {
+          item.style.display = '';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
+</body>
+</html>
