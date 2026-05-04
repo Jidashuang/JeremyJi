@@ -38,11 +38,12 @@ export function SiteShell({ children, current }: SiteShellProps) {
       {children}
 
       <footer className="footer">
-        <p>Jeremy Ji</p>
-        <span>
-          Japanese culture, media strategy, content systems, photography, and AI-native
-          workflows.
-        </span>
+        <p>Jeremy Ji · © {new Date().getFullYear()}</p>
+        <nav className="footer-links" aria-label="Social">
+          <a href="https://www.zhihu.com/people/ji-qing-qiu" target="_blank" rel="noreferrer">Zhihu</a>
+          <a href="https://space.bilibili.com/6963341" target="_blank" rel="noreferrer">Bilibili</a>
+          <a href="https://www.instagram.com/jeremyjee/" target="_blank" rel="noreferrer">Instagram</a>
+        </nav>
       </footer>
     </main>
   );

@@ -40,7 +40,7 @@ export default async function AreaPage({ params }: PageProps) {
   }
 
   return (
-    <SiteShell current="thinking-feed">
+    <SiteShell current="areas">
       <section className="section area-shell">
         <div className="area-topline">
           <Link className="back-link" href="/">

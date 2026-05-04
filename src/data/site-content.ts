@@ -195,7 +195,7 @@ export const channels: Channel[] = [
     platform: "Research shelf",
     handle: "信息源",
     audience: "Public-facing knowledge map rebuilt from Notion",
-    note: "原站里的信息源数据库说明你不是只写内容的人，还会稳定收集输入。",
+    note: "信息源数据库说明我不是只写内容的人——稳定的输入结构是长期输出的基础。",
     href: "https://www.notion.so/b72a6318b89f4fd9970583f379fff585#d91d641a9ba94741bf363c4fcb3499ea",
   },
 ];
@@ -206,11 +206,11 @@ export const domains: Domain[] = [
     name: "Japan / Language / Culture",
     shortLabel: "Japan",
     summary:
-      "这是你最稳定、最能体现个人语气的一条主线。它既是内容来源，也是你观察社会、语言、平台与人的方式。",
+      "我在日本文化和语言上持续输出超过 8 年——从知乎文章、B 站视频到播客。这条线既是内容来源，也是我观察社会、语言和人的方式。",
     whyItMatters:
-      "网站里关于日本的部分，不应该被当成兴趣附录，而应该被展示成你最有辨识度的认知入口。",
+      "关于日本的部分，不是兴趣附录，而是我最有辨识度的认知入口。",
     signal:
-      "从知乎 headline “关注不一样的日本”，到 B 站的日本语教室和播客，这条线不是偶发兴趣，而是长期公开输出。",
+      "从知乎 headline “关注不一样的日本”，到 B 站的日语教室系列和播客，这条线有稳定的长期公开输出。",
     image: "/video-tokyo-words.jpg",
     strengths: [
       "把语言、文化和现实生活细节讲得具体而不僵硬",
@@ -261,7 +261,7 @@ export const domains: Domain[] = [
       {
         title: "如何用日文说我爱你",
         format: "Bilibili",
-        description: "最有记忆点的早期代表作之一，能看出你如何把语言内容做得更有表演感。",
+        description: "最早期也最有记忆点的一支——用表演感和生活化角度讲语言，而不是课堂式教学。",
         href: "https://www.bilibili.com/video/BV1at411k71b",
         image: "/video-love-you.jpg",
         ctaLabel: "Watch video",
@@ -269,7 +269,7 @@ export const domains: Domain[] = [
       {
         title: "在东京用得上的日语词",
         format: "Bilibili",
-        description: "把日语放进生活场景，而不是教条式教学，这也是你内容风格的核心。",
+        description: "把日语放进生活场景，不做教条式教学。这是我一直以来的内容风格。",
         href: "https://www.bilibili.com/video/BV18t411B7Bm",
         image: "/video-tokyo-words.jpg",
         ctaLabel: "Watch video",
@@ -277,7 +277,7 @@ export const domains: Domain[] = [
       {
         title: "职场日语指南",
         format: "Bilibili",
-        description: "把工作语境和语言细节接到一起，说明你擅长处理“语言如何被真正使用”。",
+        description: "把工作语境和语言细节并到一起——语言在真实场景里如何被使用，比语法规则更有意思。",
         href: "https://www.bilibili.com/video/BV11t411T74H",
         image: "/video-office-japanese.jpg",
         ctaLabel: "Watch video",
@@ -289,11 +289,11 @@ export const domains: Domain[] = [
     name: "Marketing / Media Systems",
     shortLabel: "Marketing",
     summary:
-      "这是你最强的专业主线，不是抽象地会营销，而是能处理预算、媒介、内容、平台、人群和结果之间的关系。",
+      "这是我最强的专业主线——不是抽象地“会营销”，而是能处理预算、媒介、内容、平台、人群和结果之间的关系。",
     whyItMatters:
-      "网站里应该把这部分清楚地分离成真正擅长的能力层，而不是和兴趣内容混在一起。",
+      "这部分展示的是真正擅长的能力层，区分于兴趣内容。",
     signal:
-      "简历里最扎实的成果都在这里出现：1.5 亿元预算、Recall +30%、CAC -20%、到店 +50%、销售 +20%。",
+      "7 年经验，1.5 亿元预算管理，Nintendo / Bicester / Range Rover 项目里有可验证的数字。",
     image: "/notion-hero-photo.jpg",
     strengths: [
       "用户洞察与人群拆分",
@@ -302,20 +302,20 @@ export const domains: Domain[] = [
       "内容形式与投放环境的匹配判断",
     ],
     lenses: [
-      "你更擅长看系统问题，而不是只追单条投放数据",
+      "更擅长看系统问题，而不是只追单条投放数据",
       "会把人群、区域、渠道、内容和预算放在一张图里一起判断",
       "重视前期诊断，也重视执行期的节奏和细节把控",
     ],
     translations: [
       "把模糊的品牌传播问题拆成可执行的工作流",
       "能把文化、平台和人群差异翻译成可投放的策略",
-      "这部分最适合转化成 Proof of Work 和 Playground",
+      "这部分能力最直接体现在 Proof of Work 和 Playground 里",
     ],
     outputs: [
       {
         title: "Nintendo CNY campaign",
         format: "Proof of Work",
-        description: "销售超预期 20%，线下到店提升 50%，是你把策略和执行连接起来的代表案例。",
+        description: "销售超预期 20%，线下到店提升 50%——把策略和执行连起来的代表案例。",
         href: "/proof-of-work",
         ctaLabel: "Open proof page",
       },
@@ -352,7 +352,7 @@ export const domains: Domain[] = [
       {
         title: "Campaign Teardown Playground",
         format: "Playground",
-        description: "把你做项目的方法拆成可体验的诊断模块，而不是只停留在结果陈列。",
+        description: "把我做项目的方法拆成可体验的诊断模块，而不是只停留在结果陈列。",
         href: "/playground",
         ctaLabel: "Open demo",
       },
@@ -363,11 +363,11 @@ export const domains: Domain[] = [
     name: "Design / Aesthetics / Presentation",
     shortLabel: "Design",
     summary:
-      "设计不是附属兴趣，而是你做内容和传播判断时的重要过滤器。它影响你怎么组织信息、怎么判断素材、怎么呈现一个系统。",
+      "设计不是附属兴趣，而是我做内容和传播判断时的重要过滤器——影响我怎么组织信息、判断素材、呈现一个系统。",
     whyItMatters:
-      "这一层能让网站明显区别于传统营销人主页，因为它解释了你为什么会在意形式、氛围和信息密度。",
+      "这一层让我的主页区别于传统营销人主页——解释了为什么我会在意形式、氛围和信息密度。",
     signal:
-      "原站里独立存在的 Design 分类、摄影入口和 Stephen Shore 封面偏好，都在说明你对视觉气质有稳定判断。",
+      "Stephen Shore 的构图偏好、摄影档案和这个站点的排版逻辑，说明我对视觉气质有稳定判断。",
     image: "/stephen-shore-cover.jpg",
     strengths: [
       "对视觉呈现和叙事气质有稳定偏好",
@@ -375,8 +375,8 @@ export const domains: Domain[] = [
       "能把审美判断和品牌传播逻辑连起来",
     ],
     lenses: [
-      "设计在你这里不是装饰，而是信息组织方式",
-      "摄影和视觉收藏会真实影响你对内容氛围的判断",
+      "设计在我这里不是装饰，而是信息组织方式",
+      "摄影和视觉收藏会真实影响我对内容氛围的判断",
       "审美偏好会反过来决定站点如何排版、取图和留白",
     ],
     translations: [
@@ -388,21 +388,21 @@ export const domains: Domain[] = [
       {
         title: "Design archive",
         format: "Archive",
-        description: "来自原站 Design 分类的文章和收藏，适合重做成专题入口。",
+        description: "Design 分类的长期文章和收藏——在设计思维、视觉系统和审美实践上的积累。",
         href: "https://www.notion.so/b72a6318b89f4fd9970583f379fff585#8cbba5848f3149bb831c1a99a0b13756",
         ctaLabel: "Open archive",
       },
       {
         title: "Photography stream",
         format: "Visual",
-        description: "照片和视觉观察可以被整理成独立的 visual journal，而不只是附在页面底部。",
+        description: "照片和视觉观察，持续整理成 visual journal 形式。",
         href: "https://www.instagram.com/jeremyjee/",
         ctaLabel: "Open Instagram",
       },
       {
         title: "Site art direction",
         format: "Website",
-        description: "这个独立站本身也应该成为你审美判断和信息组织能力的展示物。",
+        description: "这个站点本身就是我审美判断和信息组织能力的展示物。",
         href: "/",
         ctaLabel: "Back to home",
       },
@@ -411,13 +411,13 @@ export const domains: Domain[] = [
       {
         title: "Stephen Shore reference line",
         format: "Visual cue",
-        description: "原站明确写了 Stephen Shore 的 cover credit，这不是装饰性引用，而是审美线索。",
+        description: "Stephen Shore 的摄影风格——大色块、日常场景、反英雄主义构图——是我最核心的视觉参照之一。",
         image: "/stephen-shore-cover.jpg",
       },
       {
         title: "Photography and visual notes",
         format: "Instagram",
-        description: "你对现实场景的观察方式，和营销/文化判断一样，是站点里必须被看见的一层。",
+        description: "我对现实场景的观察方式，和营销与文化判断一样，是这个站点里不可缺少的一层。",
         href: "https://www.instagram.com/jeremyjee/",
         ctaLabel: "Open visual notes",
       },
@@ -435,11 +435,11 @@ export const domains: Domain[] = [
     name: "Field Notes / Personal Signals",
     shortLabel: "Notes",
     summary:
-      "这里承接你的随笔、照片、情绪、音乐和更轻一点的观察，让网站保留人的纹理，而不是只剩职业功能。",
+      "随笔、照片、情绪、音乐和更轻一点的观察——这里承接我不想被简历语言包裹的那部分。",
     whyItMatters:
-      "如果这层被拿掉，网站就会过度职业化，失去你原站里最有辨识度的那部分个性。",
+      "如果这层被拿掉，整个站点就会过度职业化，失去最有辨识度的那部分个性。",
     signal:
-      "原站首页自我介绍、随笔、照片、播客、信息源和 The Cure 这些提示，说明你本来就不想做纯职业网站。",
+      "广告狗、KOP、The Cure 死忠、摄影爱好者——这些自我描述说明我本来就不想做纯职业网站。",
     image: "/jeremy-portrait.jpg",
     strengths: [
       "能把细碎观察沉淀成有气质的内容",
@@ -448,33 +448,33 @@ export const domains: Domain[] = [
     ],
     lenses: [
       "随笔、照片、音乐偏好和 source library 共同构成个人世界观",
-      "你更像在做个人杂志，而不是简历 landing page",
+      "我更像在做个人杂志，而不是简历 landing page",
       "Field Notes 负责把职业证明重新放回一个人的生活感里",
     ],
     translations: [
       "让访客愿意继续逛，而不是看完一屏业绩就离开",
-      "让合作方更快理解你的语气、审美和思维方式",
-      "也是未来 Live Agent 更像“你本人”而不是 FAQ bot 的基础",
+      "让合作方更快理解我的语气、审美和思维方式",
+      "也是 Live Agent 更像我本人而不是 FAQ bot 的基础",
     ],
     outputs: [
       {
         title: "Field Notes shelf",
         format: "Writing",
-        description: "原站里的随笔和碎片内容，适合做成长线更新流。",
+        description: "随笔和碎片观察的存档——有长期更新的计划。",
         href: "https://www.notion.so/b72a6318b89f4fd9970583f379fff585#8cbba5848f3149bb831c1a99a0b13756",
         ctaLabel: "Open archive",
       },
       {
         title: "Instagram / photography references",
         format: "Visual",
-        description: "原站已经有照片入口，下一步应重做成更完整的视觉档案。",
+        description: "照片档案，正在从散落的 Instagram 整理成更完整的视觉记录。",
         href: "https://www.instagram.com/jeremyjee/",
         ctaLabel: "Open Instagram",
       },
       {
         title: "Source library",
         format: "Research",
-        description: "你收集的信息源可以作为个人知识结构的一部分，而不是隐藏的链接表。",
+        description: "我收集的信息源——播客、RSS、博客——是个人知识结构的一部分，不只是收藏列表。",
         href: "https://www.notion.so/b72a6318b89f4fd9970583f379fff585#d91d641a9ba94741bf363c4fcb3499ea",
         ctaLabel: "Open source library",
       },
@@ -483,21 +483,21 @@ export const domains: Domain[] = [
       {
         title: "無二無三",
         format: "Podcast",
-        description: "比起单条文章，播客更能体现个人关系和语气，是很值得继续扩写的一层。",
+        description: "和 Darin 共创的播客，比文章更能体现个人语气和真实关系。",
         href: "https://www.notion.so/b72a6318b89f4fd9970583f379fff585#210325f32bcd4eaa8d667ad8aab3f604",
         ctaLabel: "Open legacy episode",
       },
       {
         title: "Photos archive",
         format: "Visual",
-        description: "原站已经把照片独立成一块，说明你原本就把图像当成内容，而不是点缀。",
+        description: "照片一直是我记录和观察世界的方式之一——不是装饰，是内容。",
         href: "https://www.notion.so/b72a6318b89f4fd9970583f379fff585#3593ec0cf7b648b7892d9fe930a2dba5",
         ctaLabel: "Open archive",
       },
       {
         title: "Source library / 信息源",
         format: "Research",
-        description: "数据库标签包含播客、RSS、博客，说明你的输入系统也是网站内容的一部分。",
+        description: "数据库标签包含播客、RSS、博客——我的输入系统是系统性的，不只是收藏列表。",
         href: "https://www.notion.so/d7a33b6f5c88492da091f8b7fb3605f2",
         ctaLabel: "Open Notion database",
       },
@@ -521,7 +521,7 @@ export const featuredFeedEntries: FeedEntry[] = [
     title: "Jeremy 的日语教室 - 如何用日文说我爱你",
     format: "Bilibili",
     domain: "Japan",
-    description: "早期日语系列里最有记忆点的一支，说明你会用更轻巧的形式输出内容。",
+    description: "早期日语系列里最有记忆点的一支——轻巧的形式、生活化的角度，不是标准教学。",
     href: "https://www.bilibili.com/video/BV1at411k71b",
     image: "/video-love-you.jpg",
   },
@@ -537,7 +537,7 @@ export const featuredFeedEntries: FeedEntry[] = [
     title: "Jeremy 的日语教室 - 如何用日语打招呼",
     format: "Bilibili",
     domain: "Japan",
-    description: "能看出你在视频表达上的节奏感和人物感。",
+    description: "从这支视频里能感受到我在视频表达上的节奏感和人物感。",
     href: "https://www.bilibili.com/video/BV1Et41147Bw",
     image: "/video-greetings.jpg",
   },
@@ -545,7 +545,7 @@ export const featuredFeedEntries: FeedEntry[] = [
     title: "Jeremy 的日语教室 - 如何用日语点星巴克",
     format: "Bilibili",
     domain: "Japan / City life",
-    description: "生活场景切入，让语言内容更容易被记住，也更符合你的观察方式。",
+    description: "生活场景切入，让语言内容更容易被记住——比背单词有意思得多。",
     href: "https://www.bilibili.com/video/BV1mt41147hb",
     image: "/video-starbucks.jpg",
   },
@@ -553,7 +553,7 @@ export const featuredFeedEntries: FeedEntry[] = [
     title: "Jeremy 的日语教室 - 职场日语指南",
     format: "Bilibili",
     domain: "Japan / Work",
-    description: "把工作语境和语言细节并到一起，这种跨语境翻译正好对应你的工作方式。",
+    description: "把工作语境和语言细节并到一起——语言在真实场景里如何被使用，比规则更有趣。",
     href: "https://www.bilibili.com/video/BV11t411T74H",
     image: "/video-office-japanese.jpg",
   },
@@ -569,7 +569,7 @@ export const featuredFeedEntries: FeedEntry[] = [
     title: "新编日语故事 - 鲨鱼和自我陶醉",
     format: "Bilibili",
     domain: "Japan / Storytelling",
-    description: "说明你不仅会做信息型内容，也会尝试把叙事和语言学习合在一起。",
+    description: "叙事型内容——把故事和语言学习并在一起，而不只是做知识输出。",
     href: "https://www.bilibili.com/video/BV1ht41187PD",
     image: "/video-shark-story.jpg",
   },
@@ -577,14 +577,14 @@ export const featuredFeedEntries: FeedEntry[] = [
     title: "無二無三",
     format: "Podcast",
     domain: "Japan / Notes",
-    description: "和 Darin 共创的播客，适合下一步重构成完整音频入口。",
+    description: "和 Darin 共创的播客，日本相关话题的音频档案。",
     href: "https://www.notion.so/b72a6318b89f4fd9970583f379fff585#210325f32bcd4eaa8d667ad8aab3f604",
   },
   {
     title: "Instagram / photography references",
     format: "Visual",
     domain: "Design / Notes",
-    description: "照片和视觉记录目前散落在站外，后续应并进网站的 Field Notes。",
+    description: "照片和视觉记录——现实场景、东京街景、日常观察。",
     href: "https://www.instagram.com/jeremyjee/",
     image: "/notion-hero-photo.jpg",
   },
@@ -592,7 +592,7 @@ export const featuredFeedEntries: FeedEntry[] = [
     title: "Source Library / 信息源",
     format: "Research",
     domain: "Notes / Research",
-    description: "数据库标签包含播客、RSS、博客，说明输入结构本来就是你网站的一部分。",
+    description: "数据库标签包含播客、RSS、博客——我的输入结构是系统性的，不是随机收藏。",
     href: "https://www.notion.so/d7a33b6f5c88492da091f8b7fb3605f2",
   },
 ];
@@ -605,12 +605,12 @@ export const zhihuPortalLinks = [
   },
   {
     title: "Zhihu answers",
-    description: "从问题回答角度浏览你的输出。",
+    description: "从问题回答角度浏览 Jeremy 的输出。",
     href: "https://www.zhihu.com/people/ji-qing-qiu/answers",
   },
   {
     title: "Zhihu posts (articles)",
-    description: "从文章流角度浏览你的输出。",
+    description: "从文章流角度浏览 Jeremy 的输出。",
     href: "https://www.zhihu.com/people/ji-qing-qiu/posts",
   },
   {
@@ -758,15 +758,15 @@ export const legacyArchiveLinks = [
 export const sourceModes = [
   {
     title: "Podcasts",
-    description: "原信息源数据库标签之一，说明你会把声音类输入当作长期研究来源，而不是随便收藏。",
+    description: "播客是我最稳定的长期输入之一——不是随手收藏，而是会定期回听和记录的内容。",
   },
   {
     title: "RSS",
-    description: "原数据库明确存在 RSS 标签，这说明输入结构是系统性的，而不是偶发式搜索。",
+    description: "RSS 订阅是我信息系统的骨干——比算法推荐更可控，也更适合长期阅读。",
   },
   {
     title: "Blogs",
-    description: "博客类输入和长文阅读，是你网站应该保留的“慢内容”底层。",
+    description: "博客和长文是我的“慢内容”底层——不追速度，追观点和深度。",
   },
 ];
 
@@ -1151,7 +1151,7 @@ export const contactEndpoints: ContactEndpoint[] = [
     label: "Instagram",
     value: "instagram.com/jeremyjee",
     href: "https://www.instagram.com/jeremyjee/",
-    note: "如果你更想从图像和气质理解这个人，可以先看这里。",
+    note: "如果想从图像和气质了解我，可以先看这里。",
   },
 ];
 

@@ -778,6 +778,24 @@ img {
   font-weight: 700;
 }
 
+.footer-links {
+  display: flex;
+  gap: 1.2rem;
+}
+
+.footer-links a {
+  color: var(--muted);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.76rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: color 180ms ease;
+}
+
+.footer-links a:hover {
+  color: var(--warm-dark);
+}
+
 .area-page {
   padding-top: 1rem;
 }
@@ -1508,12 +1526,43 @@ img {
   }
 }
 
+.portal-card,
+.domain-card,
+.video-card,
+.shelf-card,
+.channel-card,
+.play-card,
+.feed-entry-card,
+.proof-case-card {
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+.portal-card:hover,
+.domain-card:hover,
+.video-card:hover,
+.shelf-card:hover,
+.channel-card:hover,
+.play-card:hover,
+.feed-entry-card:hover,
+.proof-case-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(62, 45, 28, 0.1);
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
 
-  .button {
+  .button,
+  .portal-card,
+  .domain-card,
+  .video-card,
+  .shelf-card,
+  .channel-card,
+  .play-card,
+  .feed-entry-card,
+  .proof-case-card {
     transition: none;
   }
 }

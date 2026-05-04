@@ -46,7 +46,7 @@ export default function ThinkingFeedPage() {
             <p className="eyebrow">Writing / Video / Podcast / Visual / Research</p>
             <h1 className="area-title">Thinking Feed</h1>
             <p className="area-summary">
-              这个页面把你的网站从“模块说明”推进到“内容入口”。重点不是把所有内容一次铺满，而是先把最能代表你的内容流和入口建立起来。
+              知乎、B 站、播客、照片、信息源——我的输出不应该分散在各个平台里过日子。这里是统一的入口。
             </p>
             <div className="cta-row">
               <Link className="button button-inline" href="/gallery">

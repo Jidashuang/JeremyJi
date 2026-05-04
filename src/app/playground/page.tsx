@@ -25,13 +25,13 @@ export default function PlaygroundPage() {
             <p className="eyebrow">Playground</p>
             <h1 className="area-title">How Jeremy solves problems</h1>
             <p className="area-summary">
-              这里不是作品堆砌区，而是方法展示区。每个模块都对应你真实工作中会做的拆解动作。
+              这里不是作品堆砌区，而是方法展示区。每个模块都对应我在实际工作中会做的拆解动作。
             </p>
           </div>
 
           <div className="signal-pill">
-            <strong>Current direction</strong>
-            <p>先用可读卡片定义模块，再逐步升级成可交互 demo。</p>
+            <strong>Methodology first</strong>
+            <p>诊断传播问题、定义受众、判断内容与渠道是否匹配——这三件事是我处理任何项目的起点。</p>
           </div>
         </div>
 
