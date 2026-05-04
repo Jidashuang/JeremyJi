@@ -1,0 +1,32 @@
+/* === Type utilities === */
+.h-display-xl { font-family: var(--font-serif); font-size: var(--t-display-xl); line-height: 0.98; font-weight: 500; letter-spacing: -0.015em; margin: 0; }
+.h-display-l  { font-family: var(--font-serif); font-size: var(--t-display-l);  line-height: 1.04; font-weight: 500; letter-spacing: -0.01em;  margin: 0; }
+.h-display-m  { font-family: var(--font-serif); font-size: var(--t-display-m);  line-height: 1.12; font-weight: 500;                            margin: 0; }
+.h-3          { font-family: var(--font-sans);  font-size: var(--t-h3);         line-height: 1.30; font-weight: 600; letter-spacing: -0.005em; margin: 0; }
+.body-l       { font-family: var(--font-sans);  font-size: var(--t-body-l);     line-height: 1.65; color: #2a221a; }
+.body         { font-family: var(--font-sans);  font-size: var(--t-body);       line-height: 1.65; color: #2a221a; }
+.eyebrow      { font-family: var(--font-mono);  font-size: var(--t-eyebrow);    letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
+.caption      { font-family: var(--font-sans);  font-size: var(--t-caption);    line-height: 1.50; color: var(--muted); }
+
+/* === Layout shells === */
+.section { width: min(var(--container-max), 100%); margin: 0 auto; padding: 0 clamp(0.9rem, 2vw, 2rem); }
+.measure { max-width: var(--measure); }
+
+/* === Pill button === */
+.pill { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.65rem 1.1rem; border: 1px solid var(--line); border-radius: 999px; font-size: 13px; font-family: var(--font-sans); transition: background 0.15s, color 0.15s; }
+.pill:hover { background: var(--paper); }
+.pill-solid { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.pill-solid:hover { background: var(--warm-dark); border-color: var(--warm-dark); }
+
+/* === Tag === */
+.tag { display: inline-block; padding: 0.25rem 0.7rem; border: 1px solid var(--line); border-radius: 999px; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.tag-solid { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.tag-warm  { background: rgba(198, 99, 54, 0.1); color: var(--warm-dark); border-color: rgba(198, 99, 54, 0.3); }
+
+/* === Hairline rules === */
+.rule        { border: none; border-top: 1px solid var(--line); margin: 0; }
+.rule-strong { border: none; border-top: 3px solid var(--ink); margin: 0; }
+.rule-warm   { border: none; border-top: 1px solid var(--warm); margin: 0; }
+
+/* === Pull quote === */
+.pull-quote { padding: 0.5rem 0 0.5rem 1.4rem; border-left: 3px solid var(--warm); font-family: var(--font-serif); font-style: italic; font-size: var(--t-h3); line-height: 1.45; max-width: var(--measure); }

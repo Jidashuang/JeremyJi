@@ -1,0 +1,49 @@
+:root {
+  /* Surface */
+  --bg: #f2eadf;
+  --paper-2: #faf3e8;
+  --paper: #fffaf2;
+
+  /* Ink */
+  --ink: #181512;
+  --muted: #62574c;
+  --line: rgba(24, 21, 18, 0.12);
+  --line-strong: #181512;
+
+  /* Accent (one primary, one dark hover, one semantic green) */
+  --warm: #c66336;
+  --warm-dark: #8b3c1d;
+  --green: #1f6b63;
+
+  /* Type families — fall through to CN fallback */
+  --font-serif: var(--font-display), var(--font-cn-serif), Georgia, serif;
+  --font-sans: var(--font-body), var(--font-cn-sans), -apple-system, sans-serif;
+  --font-mono: var(--font-mono), "SF Mono", Menlo, monospace;
+
+  /* Type scale (8 stops per spec §3.2) */
+  --t-display-xl: 84px;
+  --t-display-l: 56px;
+  --t-display-m: 36px;
+  --t-h3: 22px;
+  --t-body-l: 18px;
+  --t-body: 15px;
+  --t-eyebrow: 11px;
+  --t-caption: 13px;
+
+  /* Layout */
+  --container-max: 1180px;
+  --measure: 60ch;
+  --section-gap: 96px;
+  --section-gap-mobile: 64px;
+  --component-gap: 32px;
+  --card-gap: 14px;
+}
+
+@media (max-width: 720px) {
+  :root {
+    --t-display-xl: 56px;
+    --t-display-l: 40px;
+    --t-display-m: 28px;
+    --section-gap: 64px;
+  }
+}
