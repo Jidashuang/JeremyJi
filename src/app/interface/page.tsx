@@ -1,87 +1,62 @@
-import Link from "next/link";
-import type { Metadata } from "next";
 import { SiteShell } from "@/components/site-shell";
-import { contactEndpoints, interfaceRules, interfaceTracks } from "@/data/site-content";
-
-export const metadata: Metadata = {
-  title: "Interface | Jeremy Ji",
-  description:
-    "A protocol-style collaboration page describing how to work with Jeremy Ji across strategy, content, and research projects.",
-};
+import { SectionNumberBar } from "@/components/primitives/section-number-bar";
+import { PullQuote } from "@/components/primitives/pull-quote";
+import { tracks, endpoints, faq, briefTemplate, protocolLine } from "@/data/interface";
 
 export default function InterfacePage() {
+  const mailtoBody = encodeURIComponent(briefTemplate);
+  const briefSubject = encodeURIComponent("[Brief] ");
+  const emailEndpoint = endpoints.find((e) => e.label === "Email");
+  const briefHref = emailEndpoint
+    ? `${emailEndpoint.href}?subject=${briefSubject}&body=${mailtoBody}`
+    : "#";
+
   return (
     <SiteShell current="interface">
-      <section className="section area-shell">
-        <div className="area-topline">
-          <Link className="back-link" href="/">
-            Back to Home
-          </Link>
-          <span className="area-kicker">Protocol / Contact</span>
-        </div>
+      <section className="section" style={{ paddingTop: "20px" }}>
+        <SectionNumberBar number="05" label="Interface" trailing="How to work with me" />
+        <h1 className="h-display-l">联系我，<br />不如说是调用我。</h1>
+        <PullQuote>{protocolLine}</PullQuote>
 
-        <div className="feed-hero">
-          <div className="area-copy">
-            <p className="eyebrow">Interface</p>
-            <h1 className="area-title">Contact is a protocol, not a form</h1>
-            <p className="area-summary">
-              你可以把这页当接口文档：什么问题适合来，来之前最好准备什么，我会输出什么。
-            </p>
-          </div>
-
-          <div className="signal-pill">
-            <strong>Best first message</strong>
-            <p>项目背景 + 当前目标 + 卡点 + 时间要求 + 现有素材</p>
-          </div>
-        </div>
-
-        <div className="interface-showcase-grid">
-          {interfaceTracks.map((item) => (
-            <article className="protocol-card" key={item.title}>
-              <h3>{item.title}</h3>
-              <p>{item.summary}</p>
-              <p className="card-kicker">Good for</p>
-              <ul className="detail-list">
-                {item.goodFor.map((entry) => (
-                  <li key={entry}>{entry}</li>
-                ))}
+        <h2 className="h-display-m" style={{ marginTop: "40px" }}>Collaboration tracks</h2>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "16px", marginTop: "20px" }}>
+          {tracks.map((t) => (
+            <article key={t.title} style={{ padding: "20px", border: "1px solid var(--line)", borderRadius: "8px", background: "var(--paper)" }}>
+              <h3 className="h-3">{t.title}</h3>
+              <p className="caption" style={{ margin: "8px 0 14px" }}>{t.summary}</p>
+              <p className="eyebrow">Good for</p>
+              <ul className="caption" style={{ paddingLeft: "16px", marginTop: "6px" }}>
+                {t.goodFor.map((g) => <li key={g}>{g}</li>)}
               </ul>
-              <p className="card-kicker">Deliverables</p>
-              <ul className="detail-list">
-                {item.deliverables.map((entry) => (
-                  <li key={entry}>{entry}</li>
-                ))}
-              </ul>
+              <p className="eyebrow" style={{ marginTop: "14px" }}>Send this</p>
+              <p className="caption" style={{ marginTop: "4px" }}>{t.sendThis}</p>
             </article>
           ))}
         </div>
 
-        <article className="area-card">
-          <p className="card-kicker">Working rules</p>
-          <div className="rule-grid">
-            {interfaceRules.map((rule) => (
-              <article className="rule-card" key={rule.title}>
-                <h3>{rule.title}</h3>
-                <p>{rule.detail}</p>
-              </article>
-            ))}
-          </div>
-        </article>
+        <h2 className="h-display-m" style={{ marginTop: "40px" }}>Send a brief</h2>
+        <p className="body-l measure">直接用模板发邮件给我，最省时间。</p>
+        <a href={briefHref} className="pill pill-solid" style={{ marginTop: "16px" }}>Open mail composer →</a>
 
-        <article className="area-card">
-          <p className="card-kicker">Endpoints</p>
-          <ul className="endpoint-list">
-            {contactEndpoints.map((item) => (
-              <li key={item.label}>
-                <span>{item.label}</span>
-                <a href={item.href} target="_blank" rel="noreferrer">
-                  {item.value}
-                </a>
-                <em>{item.note}</em>
-              </li>
-            ))}
-          </ul>
-        </article>
+        <h2 className="h-display-m" style={{ marginTop: "40px" }}>Endpoints</h2>
+        <ul style={{ listStyle: "none", padding: 0, fontFamily: "var(--font-mono)", borderTop: "1px solid var(--line)" }}>
+          {endpoints.map((e) => (
+            <li key={e.label} style={{ display: "flex", justifyContent: "space-between", padding: "12px 0", borderBottom: "1px solid var(--line)" }}>
+              <a href={e.href}>{e.label}</a>
+              <span style={{ color: "var(--muted)" }}>{e.value}</span>
+            </li>
+          ))}
+        </ul>
+
+        <h2 className="h-display-m" style={{ marginTop: "40px" }}>FAQ</h2>
+        <div style={{ borderTop: "1px solid var(--line)" }}>
+          {faq.map((entry) => (
+            <details key={entry.q} style={{ borderBottom: "1px solid var(--line)", padding: "16px 0" }}>
+              <summary className="h-3" style={{ cursor: "pointer" }}>{entry.q}</summary>
+              <p className="body" style={{ marginTop: "10px" }}>{entry.a}</p>
+            </details>
+          ))}
+        </div>
       </section>
     </SiteShell>
   );

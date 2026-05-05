@@ -1,123 +1,71 @@
-import Link from "next/link";
-import type { Metadata } from "next";
 import { SiteShell } from "@/components/site-shell";
-import { careerTimeline, credentialGroups, proofCases, proofMetrics } from "@/data/site-content";
+import { SectionNumberBar } from "@/components/primitives/section-number-bar";
+import { CaseCard } from "@/components/cards/case-card";
+import { DownloadButton } from "@/components/primitives/download-button";
+import { cases } from "@/data/cases";
 
-export const metadata: Metadata = {
-  title: "Proof of Work | Jeremy Ji",
-  description:
-    "Verified outcomes, campaign cases, and career timeline for Jeremy Ji across media strategy and communication roles.",
-};
+const TIMELINE_DETAIL = [
+  {
+    when: "2023.12 — 2024.04",
+    role: "Sr. Media Planning Mgr",
+    who: "OMG · Hearts & Science",
+    clients: "Range Rover, Jaguar — see CV for full list",
+  },
+  {
+    when: "2021.09 — 2023.09",
+    role: "Planning Manager",
+    who: "EssenceMediacom",
+    clients: "Nintendo, Bicester Village — see CV for full list",
+  },
+  {
+    when: "2021.03 — 2021.09",
+    role: "Planning Manager",
+    who: "Havas",
+    clients: "see CV for client list",
+  },
+  {
+    when: "2019.10 — 2021.03",
+    role: "Asst. Planning Mgr",
+    who: "Dentsu Aegis",
+    clients: "PUMA — see CV for full list",
+  },
+];
 
 export default function ProofOfWorkPage() {
   return (
-    <SiteShell current="proof-of-work">
-      <section className="section area-shell">
-        <div className="area-topline">
-          <Link className="back-link" href="/">
-            Back to Home
-          </Link>
-          <span className="area-kicker">Cases / Metrics / Timeline</span>
+    <SiteShell current="proof">
+      <section className="section" style={{ paddingTop: "20px" }}>
+        <SectionNumberBar number="02" label="Proof of Work" trailing="Cases & career" />
+        <h1 className="h-display-l" style={{ maxWidth: "18ch", marginBottom: "20px" }}>
+          我做过的事，<br />我学到的事。
+        </h1>
+
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "22px", marginTop: "28px" }}>
+          {cases.map((c, i) => <CaseCard key={c.slug} c={c} index={i} />)}
         </div>
 
-        <div className="feed-hero">
-          <div className="area-copy">
-            <p className="eyebrow">Proof of Work</p>
-            <h1 className="area-title">Evidence first, claims second</h1>
-            <p className="area-summary">
-              这里把简历里最有证明力的部分独立出来：预算范围、真实项目、结果变化、能力轨迹和工具栈。
-            </p>
-          </div>
-
-          <div className="signal-pill">
-            <strong>Resume</strong>
-            <a className="button button-inline" href="/JeremyJi-Resume.docx" download>
-              Download Resume
-            </a>
-          </div>
-        </div>
-
-        <div className="proof-stats proof-stats-wide">
-          {proofMetrics.map((item) => (
-            <article className="metric-card" key={item.label}>
-              <strong>{item.value}</strong>
-              <span>{item.label}</span>
-              <p>{item.detail}</p>
-            </article>
+        <h2 className="h-display-m" style={{ marginTop: "60px", marginBottom: "20px" }}>Career timeline</h2>
+        <div style={{ borderTop: "1px solid var(--line)" }}>
+          {TIMELINE_DETAIL.map((j) => (
+            <div key={j.when} style={{
+              display: "grid",
+              gridTemplateColumns: "200px 1fr",
+              padding: "20px 0",
+              borderBottom: "1px solid var(--line)",
+              gap: "24px",
+            }}>
+              <span className="eyebrow">{j.when}</span>
+              <div>
+                <h3 className="h-display-m" style={{ fontSize: "22px" }}>{j.role} · {j.who}</h3>
+                <p className="caption" style={{ marginTop: "6px" }}>Clients: {j.clients}</p>
+              </div>
+            </div>
           ))}
         </div>
 
-        <article className="area-card">
-          <p className="card-kicker">Selected cases</p>
-          <div className="proof-case-stack">
-            {proofCases.map((item) => (
-              <article className="proof-case-card" key={item.title}>
-                <div className="proof-case-head">
-                  <h2>{item.title}</h2>
-                  <span>{item.client}</span>
-                  <em>{item.period}</em>
-                </div>
-                <p>{item.summary}</p>
-                <p className="card-kicker">Role: {item.role}</p>
-                <ul className="detail-list">
-                  {item.results.map((result) => (
-                    <li key={result}>{result}</li>
-                  ))}
-                </ul>
-                <p className="card-kicker">Approach</p>
-                <ul className="detail-list">
-                  {item.approach.map((entry) => (
-                    <li key={entry}>{entry}</li>
-                  ))}
-                </ul>
-                <p className="card-kicker">Stack</p>
-                <div className="area-chip-row">
-                  {item.stack.map((entry) => (
-                    <span className="area-chip" key={entry}>
-                      {entry}
-                    </span>
-                  ))}
-                </div>
-              </article>
-            ))}
-          </div>
-        </article>
-
-        <div className="proof-bottom-grid">
-          <article className="area-card">
-            <p className="card-kicker">Career timeline</p>
-            <div className="timeline-list">
-              {careerTimeline.map((item) => (
-                <article className="timeline-item" key={`${item.company}-${item.period}`}>
-                  <h3>{item.company}</h3>
-                  <strong>{item.role}</strong>
-                  <em>{item.period}</em>
-                  <p>{item.summary}</p>
-                  <ul className="detail-list">
-                    {item.bullets.map((entry) => (
-                      <li key={entry}>{entry}</li>
-                    ))}
-                  </ul>
-                </article>
-              ))}
-            </div>
-          </article>
-
-          <article className="area-card">
-            <p className="card-kicker">Credentials and tools</p>
-            <div className="credential-grid">
-              {credentialGroups.map((group) => (
-                <article className="credential-card" key={group.title}>
-                  <h3>{group.title}</h3>
-                  <ul className="detail-list">
-                    {group.items.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
-                </article>
-              ))}
-            </div>
-          </article>
+        <div style={{ marginTop: "40px", display: "flex", gap: "12px", flexWrap: "wrap" }}>
+          <DownloadButton href="/cv/jeremy-ji-cv-en.pdf">↓ Download CV · EN</DownloadButton>
+          <DownloadButton href="/cv/jeremy-ji-cv-cn.pdf" variant="ghost">↓ CV · 中文</DownloadButton>
         </div>
       </section>
     </SiteShell>

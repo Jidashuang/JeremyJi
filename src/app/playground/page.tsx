@@ -1,62 +1,51 @@
-import Link from "next/link";
-import type { Metadata } from "next";
 import { SiteShell } from "@/components/site-shell";
-import { domains, playgroundExperiments } from "@/data/site-content";
+import { SectionNumberBar } from "@/components/primitives/section-number-bar";
+import { PlayCard } from "@/components/cards/play-card";
 
-export const metadata: Metadata = {
-  title: "Playground | Jeremy Ji",
-  description:
-    "Interactive capability demos for Jeremy Ji's strategy, audience diagnosis, and content-channel reframing.",
-};
+const FUTURE = [
+  { title: "Media Mix Simulator", note: "Channel choices by goal — interactive in V1" },
+  { title: "Japan Trend Scan", note: "Track and translate cultural signals — V1" },
+  { title: "Creative Brief Generator", note: "Messy ask → clear brief — V1" },
+];
 
 export default function PlaygroundPage() {
   return (
     <SiteShell current="playground">
-      <section className="section area-shell">
-        <div className="area-topline">
-          <Link className="back-link" href="/">
-            Back to Home
-          </Link>
-          <span className="area-kicker">Capability demos</span>
+      <section className="section" style={{ paddingTop: "20px" }}>
+        <SectionNumberBar number="04" label="Playground" trailing="Capability demos" />
+        <h1 className="h-display-l" style={{ maxWidth: "22ch", marginBottom: "14px" }}>
+          不是作品集 ——<br />是思维方式的演示区。
+        </h1>
+
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "22px", marginTop: "28px" }}>
+          <PlayCard
+            index={1}
+            slug="campaign-teardown"
+            title="Campaign Teardown"
+            description="给我一个最近上市的品牌，我把它的传播打法拆开给你看。"
+            sampleInput="喜茶 × FENDI 联名"
+            sampleOutput="6 段诊断 · 3 个不足 · 2 条改进建议"
+          />
+          <PlayCard
+            index={2}
+            slug="audience-mapper"
+            title="Audience Mapper"
+            description="一个品类 → 一张受众分层逻辑图。"
+            sampleInput="30+ 女性身体护理"
+            sampleOutput="4 层人群 · 各自痛点 · 媒介触点"
+          />
         </div>
 
-        <div className="feed-hero">
-          <div className="area-copy">
-            <p className="eyebrow">Playground</p>
-            <h1 className="area-title">How Jeremy solves problems</h1>
-            <p className="area-summary">
-              这里不是作品堆砌区，而是方法展示区。每个模块都对应我在实际工作中会做的拆解动作。
-            </p>
-          </div>
-
-          <div className="signal-pill">
-            <strong>Methodology first</strong>
-            <p>诊断传播问题、定义受众、判断内容与渠道是否匹配——这三件事是我处理任何项目的起点。</p>
-          </div>
-        </div>
-
-        <div className="playground-gallery">
-          {playgroundExperiments.map((item) => (
-            <article className="playground-showcase-card" key={item.title}>
-              <p className="card-kicker">{item.status}</p>
-              <h2>{item.title}</h2>
-              <p>{item.summary}</p>
-              <strong>{item.prompt}</strong>
-              <em>{item.output}</em>
-            </article>
+        <h2 className="h-display-m" style={{ marginTop: "60px" }}>Future demos</h2>
+        <p className="caption" style={{ marginBottom: "20px" }}>需要真接入 LLM 才有意义的，留给 V1。</p>
+        <div style={{ borderTop: "1px solid var(--line)" }}>
+          {FUTURE.map((f) => (
+            <div key={f.title} style={{ padding: "16px 0", borderBottom: "1px solid var(--line)" }}>
+              <h3 className="h-3">{f.title}</h3>
+              <p className="caption">{f.note}</p>
+            </div>
           ))}
         </div>
-
-        <article className="area-card">
-          <p className="card-kicker">Mapped back to domain pages</p>
-          <div className="area-chip-row">
-            {domains.map((item) => (
-              <Link className="area-chip" key={item.slug} href={`/areas/${item.slug}`}>
-                {item.shortLabel}
-              </Link>
-            ))}
-          </div>
-        </article>
       </section>
     </SiteShell>
   );
