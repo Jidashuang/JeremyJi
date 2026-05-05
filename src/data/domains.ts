@@ -5,25 +5,55 @@ const raw: Domain[] = [
     slug: "japan",
     name: "Japan",
     shortLabel: "Domain · 01",
-    manifesto: "[Manifesto for Japan — written in Phase 3 Task 32. This placeholder satisfies the 50-char minimum.]",
+    manifesto: `我看日本，看的是它怎么给世界提供消费、媒介、设计的早期样本。
+
+90 年代日本就在做今天中国还在摸索的事：高密度城市的零售逻辑、高度细分的消费分层、平台和媒介的强结构化。便利店收银台后面的灯光、JR 月台的广告排版、大阪街头小店的 menu 设计——这些是被反复验证过的"商业系统"，写在城市表面，免费供人观察。
+
+我会去读 7-Eleven 的 PB 命名逻辑，会看 Pocky 怎么在双 11 之外造一个属于自己的节日，会研究"宅"文化怎么从亚文化变成主流叙事的供给方。每一个观察都能拆成营销判断：哪些品类只能用"日常感"打、为什么"复古的未来"在日本设计里反复回潮、日本人对 logo 的容忍度为什么低于美国。
+
+我写日语教学和日本设计史，是为了把日本当作运行了半个世纪的样本系统——给在中国做品牌的人一个免费的对照组。`,
   },
   {
     slug: "marketing",
     name: "Marketing",
     shortLabel: "Domain · 02",
-    manifesto: "[Manifesto for Marketing — written in Phase 3 Task 32. This placeholder satisfies the 50-char minimum.]",
+    manifesto: `营销在大多数 deck 里被当作创意问题。我把它当作消费者行为的研究问题。
+
+每一份 brief 之前应该先问三件事：他们买这个品类的真实理由是什么、他们用什么平台做出决定、过去的传播在哪一步漏了。这三件事没问清楚，再漂亮的 big idea 也只是 deck 里的修辞。
+
+7 年代理商工作让我对一类话术免疫："要做爆款"、"要拉年轻人"、"要传播品牌精神"。这些都是结果。策略要回答的问题更具体：在多少预算下、用什么渠道组合、在多长时间窗内、把哪些消费决策推到哪一步。
+
+我喜欢有 KPI 的工作。喜欢能复盘的工作。喜欢能 5 年之后还能拿出来讲的方法论——能复制的方法论比一次出圈的 campaign 重要。
+
+营销是研究、也是生意。这两件事在我这里合在一起。`,
   },
   {
     slug: "design",
     name: "Design",
     shortLabel: "Domain · 03",
-    manifesto: "[Manifesto for Design — written in Phase 3 Task 32. This placeholder satisfies the 50-char minimum.]",
+    manifesto: `设计对我来说，是判断的可视化形式。
+
+一份 brief 长什么样、一张 deck 的版式怎么排、一个 campaign 的颜色用什么——这些选择背后都是判断。判断对了，设计自己会说话；判断错了，再贵的设计师也救不回来。
+
+我重度受日本设计史影响：杉浦康平的书籍排版、原研哉的 MUJI 视觉系统、亀倉雄策的 logo lineage。这些人有一个共同特点——从来没有把设计当成"装饰"。每一个字号、每一根线、每一个留白，都对应一个商业判断。
+
+我用照片来训练这种判断。拍东京、拍便利店、拍清水混凝土。看得多了，做媒介策略的时候不需要查 deck，直接知道哪种视觉调性能 fit 哪种受众。
+
+设计是品味，品味可以被训练。`,
   },
   {
     slug: "field-notes",
     name: "Field Notes",
     shortLabel: "Domain · 04",
-    manifesto: "[Manifesto for Field Notes — written in Phase 3 Task 32. This placeholder satisfies the 50-char minimum.]",
+    manifesto: `Field Notes 是给观察留的位置——比文章短、比 tweet 长、不需要起承转合。
+
+便利店收银台后面的灯光让我突然懂了"日常营销"是什么意思。东京 JR 站台的广告版面让我重新评估"竖屏 vs 横屏"。某个商场地下一层的指引牌让我看到一个被忽视的零售决策环节。
+
+这些片段太短，写不成一篇完整文章；又太具体，发 tweet 浪费。所以专门留一个抽屉装它们。
+
+写法很简单：一张照片或一个截图、一两段观察、一两条问题。日积月累。等到某天要写一份 deck 或一篇长文的时候，回来翻这个抽屉，会发现思路早就在这里准备好了——只是当时不知道自己在准备。
+
+一个慢慢长成的笔记本。不催更。`,
   },
 ];
 
