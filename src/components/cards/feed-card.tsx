@@ -14,9 +14,9 @@ const FORMAT_LABEL: Record<FeedItem["format"], string> = {
 };
 
 const FORMAT_ACCENT: Record<FeedItem["format"], string> = {
-  article: "linear-gradient(135deg, #b8a584, #8b7757)",
-  video:   "linear-gradient(135deg, #c66336, #8b3c1d)",
-  podcast: "linear-gradient(135deg, #1f6b63, #145954)",
+  article: "var(--gradient-article)",
+  video:   "var(--gradient-video)",
+  podcast: "var(--gradient-podcast)",
   note:    "var(--paper-2)",
   source:  "var(--paper-2)",
 };
