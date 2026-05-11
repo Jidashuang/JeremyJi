@@ -39,8 +39,7 @@ export const tracks: CollabTrack[] = [
 ];
 
 export const endpoints: Endpoint[] = [
-  // TODO: 用真实邮箱替换 hi@jeremyji.dev 之前确认。
-  { label: "Email", value: "hi@jeremyji.dev", href: "mailto:hi@jeremyji.dev" },
+  { label: "Email", value: "jidashuang@outlook.com", href: "mailto:jidashuang@outlook.com" },
   { label: "LinkedIn", value: "/in/jeremyji", href: "https://www.linkedin.com/in/jeremyji" },
   { label: "WeChat", value: "by intro only", href: "#" },
   { label: "Telegram", value: "@jeremyjee", href: "https://t.me/jeremyjee" },
