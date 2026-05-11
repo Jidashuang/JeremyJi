@@ -14,6 +14,14 @@
   --warm: #c66336;
   --warm-dark: #8b3c1d;
   --green: #1f6b63;
+  --green-dark: #145954;
+  --earth: #b8a584;
+  --earth-dark: #8b7757;
+
+  /* Format gradients (consumed by feed-card.tsx) */
+  --gradient-article: linear-gradient(135deg, var(--earth), var(--earth-dark));
+  --gradient-video: linear-gradient(135deg, var(--warm), var(--warm-dark));
+  --gradient-podcast: linear-gradient(135deg, var(--green), var(--green-dark));
 
   /* Type families — fall through to CN fallback */
   --font-serif: var(--font-display), var(--font-cn-serif), Georgia, serif;
