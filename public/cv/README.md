@@ -1,5 +1,11 @@
 # CV files
 
+> **Status:** W1 placeholders dropped 2026-05-11. Real bilingual CV due W3.
+> The PDFs at `jeremy-ji-cv-en.pdf` / `jeremy-ji-cv-cn.pdf` are minimal 1-page
+> notes that point visitors to the Word resume and email — enough so the
+> Download buttons don't 404 during the soft launch. Replace them with the
+> real exports in W3.
+
 ## TODO before public launch
 
 - Convert `public/JeremyJi-Resume.docx` → `jeremy-ji-cv-en.pdf`
