@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { CaseSchema, FieldNoteSchema, FeedItemSchema } from "./schemas";
+import { CaseSchema, FieldNoteSchema, FeedItemSchema, FAQEntrySchema, CampaignPresetSchema } from "./schemas";
 
 describe("schemas", () => {
   it("validates a complete case", () => {
@@ -48,5 +48,64 @@ describe("schemas", () => {
       date: "2025-11-04",
     };
     expect(() => FieldNoteSchema.parse(note)).not.toThrow();
+  });
+});
+
+
+describe("FAQEntrySchema", () => {
+  it("validates a complete entry with both languages", () => {
+    const valid = {
+      id: "brief-thinking",
+      question: "他怎么思考一个新品牌的传播 brief?",
+      triggers: ["brief", "新品牌", "传播 brief"],
+      answer: "三步:先质疑 brief 里的假设,再拆决策路径,最后定补洞优先级。",
+      followUp: [{ label: "看 Range Rover 案例", href: "/proof-of-work/range-rover-flagship" }],
+      language: "both",
+    };
+    expect(() => FAQEntrySchema.parse(valid)).not.toThrow();
+  });
+
+  it("rejects an entry with empty triggers", () => {
+    expect(() =>
+      FAQEntrySchema.parse({
+        id: "x", question: "x", triggers: [], answer: "x", followUp: [], language: "zh",
+      })
+    ).toThrow();
+  });
+
+  it("rejects an entry with bad language enum", () => {
+    expect(() =>
+      FAQEntrySchema.parse({
+        id: "x", question: "x", triggers: ["x"], answer: "x", followUp: [], language: "jp",
+      })
+    ).toThrow();
+  });
+});
+
+describe("CampaignPresetSchema", () => {
+  it("validates a preset with all 5 blocks", () => {
+    const valid = {
+      id: "nintendo-cny-2022",
+      label: "Nintendo · 2022 春节",
+      triggers: ["nintendo", "任天堂", "春节", "cny"],
+      blocks: {
+        problemFraming: "Switch 在中国市场需要把春节窗口当成情绪放大器。",
+        audience: "家庭决策者 + 年轻玩家的双层人群,触点分别在朋友圈和 B 站。",
+        channelMix: "朋友圈视频做 reach,B 站长内容做 consideration,京东自营页接 conversion。",
+        pacing: "腊月廿三起 7 天预热,初一到初五日更,初六收口复盘。",
+        creativeFit: "全家欢 IP 跟春节场景天然咬合,色彩用红+金对齐节日符号。",
+      },
+      resultLink: { label: "看完整复盘 →", href: "/proof-of-work/nintendo-cny-2022" },
+    };
+    expect(() => CampaignPresetSchema.parse(valid)).not.toThrow();
+  });
+
+  it("rejects a preset missing problemFraming", () => {
+    expect(() =>
+      CampaignPresetSchema.parse({
+        id: "x", label: "x", triggers: ["x"],
+        blocks: { audience: "x", channelMix: "x", pacing: "x", creativeFit: "x" },
+      })
+    ).toThrow();
   });
 });

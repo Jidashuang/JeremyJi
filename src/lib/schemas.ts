@@ -52,3 +52,40 @@ export const DomainSchema = z.object({
   manifesto: z.string().min(50),         // 200-300 word manifesto goes here
 });
 export type Domain = z.infer<typeof DomainSchema>;
+
+// --- W2: FAQ + Campaign Teardown schemas ---
+
+export const LanguageSchema = z.enum(["zh", "en", "both"]);
+
+export const FollowUpSchema = z.object({
+  label: z.string().min(1),
+  href: z.string().min(1),
+});
+
+export const FAQEntrySchema = z.object({
+  id: z.string().min(1),
+  question: z.string().min(1),
+  triggers: z.array(z.string().min(1)).min(1),
+  answer: z.string().min(1),
+  followUp: z.array(FollowUpSchema).default([]),
+  language: LanguageSchema,
+});
+export type FAQEntry = z.infer<typeof FAQEntrySchema>;
+
+export const TeardownBlocksSchema = z.object({
+  problemFraming: z.string().min(1),
+  audience: z.string().min(1),
+  channelMix: z.string().min(1),
+  pacing: z.string().min(1),
+  creativeFit: z.string().min(1),
+});
+export type TeardownBlocks = z.infer<typeof TeardownBlocksSchema>;
+
+export const CampaignPresetSchema = z.object({
+  id: z.string().min(1),
+  label: z.string().min(1),
+  triggers: z.array(z.string().min(1)).min(1),
+  blocks: TeardownBlocksSchema,
+  resultLink: FollowUpSchema.optional(),
+});
+export type CampaignPreset = z.infer<typeof CampaignPresetSchema>;
