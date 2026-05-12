@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { SectionNumberBar } from "@/components/primitives/section-number-bar";
-import { prompts } from "@/data/live-agent";
+import { faqEntries } from "@/data/live-agent";
 
 export function LiveAgentBlock() {
-  // Homepage shows 4 of 5 prompts as a teaser; full set lives on /live-agent.
-  const homepagePrompts = prompts.slice(0, 4);
+  // Homepage shows first 4 of 10 FAQ entries as a teaser; full set lives on /live-agent.
+  const homepagePrompts = faqEntries.slice(0, 4);
 
   return (
     <section className="section">
@@ -19,7 +19,7 @@ export function LiveAgentBlock() {
         </p>
         <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
           {homepagePrompts.map((p) => (
-            <li key={p.question} style={{
+            <li key={p.id} style={{
               padding: "14px 0",
               borderTop: "1px solid rgba(255,255,255,0.1)",
               fontFamily: "var(--font-serif)", fontStyle: "italic", fontSize: "17px",

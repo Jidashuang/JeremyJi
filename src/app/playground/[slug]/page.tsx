@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { SiteShell } from "@/components/site-shell";
 import { SectionNumberBar } from "@/components/primitives/section-number-bar";
+import { CampaignTeardown } from "@/components/playground/campaign-teardown";
 
 const SLUGS = ["campaign-teardown", "audience-mapper"] as const;
 type Slug = (typeof SLUGS)[number];
@@ -17,15 +18,18 @@ export function generateStaticParams() {
 export default async function PlaygroundDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   if (!SLUGS.includes(slug as Slug)) return notFound();
-  const Body = (await import(`@/data/playground/${slug}.mdx`)).default;
+  const typedSlug = slug as Slug;
+  const Body = (await import(`@/data/playground/${typedSlug}.mdx`)).default;
+
   return (
     <SiteShell current="playground">
       <article className="section" style={{ paddingTop: "20px" }}>
         <SectionNumberBar number="04" label="Playground" trailing="Capability demo" />
-        <h1 className="h-display-l">{TITLES[slug as Slug]}</h1>
+        <h1 className="h-display-l">{TITLES[typedSlug]}</h1>
         <div className="measure" style={{ marginTop: "28px" }}>
           <Body />
         </div>
+        {typedSlug === "campaign-teardown" ? <CampaignTeardown /> : null}
       </article>
     </SiteShell>
   );
